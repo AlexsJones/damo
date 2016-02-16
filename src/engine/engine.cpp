@@ -2,16 +2,22 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-16 22:44]
+ *     Last Modified       :     [2016-02-16 23:03]
  *     Description         :      
  **********************************************************************************/
 
 #include "engine.hpp"
+#include <SDL2/SDL_image.h>
 
 Engine::Engine(int width, int height):m_width(width),m_height(height) {
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     cout << "SDL_Init Error: " << SDL_GetError() << endl;
+    exit(1);
+  }
+
+  if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG) {
+    cerr << "IMG_INIT:" << SDL_GetError() << endl;
     exit(1);
   }
 
@@ -41,31 +47,30 @@ Engine::~Engine() {
 }
 SDL_Texture *Engine::loadTextureFromFile(string filePath) {
 
-  SDL_Texture *texture = NULL;
-
-  SDL_Surface *loadedImage = SDL_LoadBMP(filePath.c_str());
-
-  if(loadedImage != NULL) {
-
-    texture = SDL_CreateTextureFromSurface(m_renderer,
-        loadedImage);
-
-    cleanup(loadedImage);
-
-  }else {
-    cerr << "load error: " << SDL_GetError() << endl;
+  SDL_Texture *texture = IMG_LoadTexture(m_renderer,
+        filePath.c_str());
+  if(texture == NULL) {
+    cerr << "loadTextureFromFile:" << SDL_GetError() << endl;
   }
 
   return texture;
 }
 void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location) {
   
-  SDL_Rect dst;
-  dst.x = location.x;
-  dst.y = location.y;
-  SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
-  SDL_RenderCopy(m_renderer,texture,NULL,&dst);
+  int w,h;
+  SDL_QueryTexture(texture,NULL,NULL,&w,&h);
+  renderTexture(texture,location.x,location.y,w,h);
 }
+void Engine::renderTexture(SDL_Texture *texture, int x, int y, int w, int h) {
+
+  SDL_Rect dst;
+  dst.x = x;
+  dst.y = y;
+  dst.w = w;
+  dst.h = h;
+
+  SDL_RenderCopy(m_renderer,texture,NULL,&dst);
+} 
 void Engine::renderActor(shared_ptr<Actor> a) {
 
   renderTexture(a->getTexture(),*a->getPosition());

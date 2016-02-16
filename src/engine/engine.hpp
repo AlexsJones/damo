@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-02-16 22:21]
+ *     Last Modified       :     [2016-02-16 23:00]
  *     Description         :      
  **********************************************************************************/
 
@@ -30,6 +30,8 @@ class Engine {
 
     void renderTexture(SDL_Texture *texture, SDL_Rect location); 
 
+    void renderTexture(SDL_Texture *texture, int x, int y, int w, int h); 
+    
     void renderActor(shared_ptr<Actor> a);
 
     SDL_Renderer *m_renderer;

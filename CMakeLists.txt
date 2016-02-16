@@ -18,5 +18,5 @@ find_package(SDL REQUIRED)
 
 include_directories(${SDL_INCLUDE_DIR})
 
-target_link_libraries(damo ${SDL2_LIBRARIES})
+target_link_libraries(damo ${SDL2_LIBRARIES} -lSDL2_image)
 
