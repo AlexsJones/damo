@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++0x   CMakeFiles/damo.dir/src/main/main.cpp.o CMakeFiles/damo.dir/src/engine/engine.cpp.o CMakeFiles/damo.dir/src/engine/actor.cpp.o  -o damo -rdynamic -lSDL2 
