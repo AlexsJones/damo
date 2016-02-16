@@ -1,0 +1,6 @@
+CMakeCache*
+CMakeFiles
+damo
+*.cmake
+*.o
+Makefile
