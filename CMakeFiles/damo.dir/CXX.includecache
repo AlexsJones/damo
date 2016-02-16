@@ -9,6 +9,8 @@
 /home/anon/Code/sdl/src/engine/actor.cpp
 actor.hpp
 /home/anon/Code/sdl/src/engine/actor.hpp
+utilities.hpp
+/home/anon/Code/sdl/src/engine/utilities.hpp
 
 /home/anon/Code/sdl/src/engine/actor.hpp
 utilities.hpp

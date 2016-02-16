@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-02-16 19:29]
+ *     Last Modified       :     [2016-02-16 22:21]
  *     Description         :      
  **********************************************************************************/
 
@@ -38,6 +38,9 @@ class Engine {
 
     SDL_Window *m_window;
 
+    int m_width;
+
+    int m_height;
 };
 
 

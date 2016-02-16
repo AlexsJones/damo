@@ -2,13 +2,13 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-16 20:03]
+ *     Last Modified       :     [2016-02-16 22:44]
  *     Description         :      
  **********************************************************************************/
 
 #include "engine.hpp"
 
-Engine::Engine(int width, int height) {
+Engine::Engine(int width, int height):m_width(width),m_height(height) {
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     cout << "SDL_Init Error: " << SDL_GetError() << endl;
@@ -59,14 +59,16 @@ SDL_Texture *Engine::loadTextureFromFile(string filePath) {
   return texture;
 }
 void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location) {
-
-  SDL_RenderClear(m_renderer);
-  SDL_QueryTexture(texture,NULL,NULL,&location.w,&location.h);
-  SDL_RenderCopy(m_renderer,texture,NULL,&location);
+  
+  SDL_Rect dst;
+  dst.x = location.x;
+  dst.y = location.y;
+  SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
+  SDL_RenderCopy(m_renderer,texture,NULL,&dst);
 }
 void Engine::renderActor(shared_ptr<Actor> a) {
 
-  renderTexture(a->getTexture(),a->getPosition());
+  renderTexture(a->getTexture(),*a->getPosition());
 }
 void Engine::Tick() {
   

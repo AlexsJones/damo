@@ -2,7 +2,7 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-16 20:03]
+ *     Last Modified       :     [2016-02-16 22:43]
  *     Description         :      
  **********************************************************************************/
 
@@ -25,15 +25,22 @@ int main(int argc, char **argv) {
 
   SDL_Texture *textwo = eng->loadTextureFromFile(backgroundPath);
 
+
   shared_ptr<Actor> a = make_shared<Actor>(tex,0,100);
 
+  shared_ptr<SDL_Rect> size = a->getSize();
 
+  int x = 640 / 2 - size->w / 2;
+  int y = 480 / 2 - size->h / 2;
+
+  cout << "Setting for " << x << ":" << y << endl;
+
+  a->setPosition(x,y);
 
   for(int x = 0; x < 300; ++x){
     SDL_RenderClear(eng->m_renderer);
 
     eng->renderActor(a);
-
 
     SDL_RenderPresent(eng->m_renderer);
   }

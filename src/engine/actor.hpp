@@ -2,7 +2,7 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2016-02-16 19:16]
+*     Last Modified       :     [2016-02-16 22:37]
 *     Description         :      
 **********************************************************************************/
 
@@ -21,15 +21,20 @@ class Actor {
 
     SDL_Texture *getTexture(void);
 
-    SDL_Rect getPosition(void);
+    void setPosition(int x, int y);
+
+    shared_ptr<SDL_Rect> getPosition(void);
+
+    shared_ptr<SDL_Rect> getSize(void);
 
     Actor(SDL_Texture *texture,int x, int y);
 
+    ~Actor();
   private:
 
     SDL_Texture *m_texture;
 
-    SDL_Rect m_currentPosition;
+    shared_ptr<SDL_Rect> m_currentPosition;
 
 };
 
