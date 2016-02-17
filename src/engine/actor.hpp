@@ -2,14 +2,14 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2016-02-16 22:37]
+*     Last Modified       :     [2016-02-17 17:48]
 *     Description         :      
 **********************************************************************************/
 
 #ifndef __ACTOR_HPP__
 #define __ACTOR_HPP__
 #include "utilities.hpp"
-#include "types.hpp"
+#include <jnxc_headers/jnxguid.h>
 #include <SDL2/SDL.h>
 #include <memory>
 
@@ -27,10 +27,14 @@ class Actor {
 
     shared_ptr<SDL_Rect> getSize(void);
 
+    string getUniqueIdentifier(void);
+
     Actor(SDL_Texture *texture,int x, int y);
 
     ~Actor();
   private:
+
+    jnx_guid m_guid;
 
     SDL_Texture *m_texture;
 

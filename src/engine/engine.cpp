@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-17 13:36]
+ *     Last Modified       :     [2016-02-17 17:30]
  *     Description         :      
  **********************************************************************************/
 
@@ -30,7 +30,8 @@ Engine::Engine(int width, int height):m_width(width),m_height(height) {
     exit(1);
   }
 
-  m_renderer = SDL_CreateRenderer(m_window, -1 , SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  m_renderer = SDL_CreateRenderer(m_window, -1 ,
+      SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
   if(m_renderer == NULL) {
     cout << "SDL_CreateWindow Error: " << SDL_GetError() << endl;

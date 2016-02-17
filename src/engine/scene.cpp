@@ -2,7 +2,7 @@
 *     File Name           :     /home/anon/Code/damo/src/engine/scene.cpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-17 10:24]
-*     Last Modified       :     [2016-02-17 13:26]
+*     Last Modified       :     [2016-02-17 17:53]
 *     Description         :      
 **********************************************************************************/
 
@@ -17,4 +17,13 @@ void Scene::addActor(shared_ptr<Actor> a) {
 list<shared_ptr<Actor>> Scene::getActors(void) {
 
   return m_actorList;
+}
+void Scene::removeActor(shared_ptr<Actor> a) {
+
+    m_actorList.remove(a);
+}
+
+void Scene::removeActor(string uniqueIdentifier) {
+
+
 }

@@ -2,7 +2,7 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-17 13:36]
+ *     Last Modified       :     [2016-02-17 17:54]
  *     Description         :      
  **********************************************************************************/
 
@@ -11,12 +11,12 @@
 #include "engine.hpp"
 #include "scene.hpp"
 #include <memory>
+#include <thread>
 using namespace std;
-
 int main(int argc, char **argv) {
 
 
-  unique_ptr<Engine> eng = make_unique<Engine>(640,480); 
+  shared_ptr<Engine> eng = make_shared<Engine>(640,480); 
 
   string imagePath = getResourcePath("test") + "/image.png";
 
@@ -41,21 +41,27 @@ int main(int argc, char **argv) {
   int xt = 640 / 40;
   int yt = 480 / 40;
 
-
   shared_ptr<Scene> s = make_shared<Scene>();
 
   s->addActor(a);
 
   eng->addScene(s);
 
-  while(1) {
-  
+  int c =0;
+
+  cout << "Unique id: " << a->getUniqueIdentifier() << endl;
+
+  while(c  < 100) {
+
+    if(c == 50) {
+      s->removeActor(a);
+    }
+    if(c == 75) {
+      s->addActor(a);
+    }
     eng->tick();
-  
+  ++c;
   }
-
-
-
   /*
      for(int x = 0; x < 300; ++x){
      SDL_RenderClear(eng->m_renderer);

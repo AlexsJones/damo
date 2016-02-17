@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-02-17 13:36]
+ *     Last Modified       :     [2016-02-17 17:30]
  *     Description         :      
  **********************************************************************************/
 
@@ -12,7 +12,6 @@
 #include "utilities.hpp"
 #include "actor.hpp"
 #include "scene.hpp"
-#include "types.hpp"
 #include <list>
 #include <memory>
 
