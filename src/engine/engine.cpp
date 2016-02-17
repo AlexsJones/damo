@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-17 17:30]
+ *     Last Modified       :     [2016-02-17 21:46]
  *     Description         :      
  **********************************************************************************/
 
@@ -83,9 +83,24 @@ void Engine::renderScene(shared_ptr<Scene> s) {
   }
 
 }
+void Engine::event() {
+
+  SDL_Event e;
+  while(SDL_PollEvent(&e)) {
+    if(e.type == SDL_QUIT) {
+      b_shouldExit = true;
+    }
+    if(e.type == SDL_KEYDOWN) {
+      b_shouldExit = true;
+    }
+  }
+}
 void Engine::tick() {
 
   SDL_RenderClear(m_renderer);
+  
+  //Trap events
+  event();
 
   for(auto s : m_scenes) {
     renderScene(s);
@@ -96,4 +111,8 @@ void Engine::tick() {
 void Engine::addScene(shared_ptr<Scene> s) {
 
   m_scenes.push_back(s);
+}
+bool Engine::IsExiting(void) {
+
+  return b_shouldExit;
 }
