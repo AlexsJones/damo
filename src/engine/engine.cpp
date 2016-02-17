@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-17 21:46]
+ *     Last Modified       :     [2016-02-17 22:17]
  *     Description         :      
  **********************************************************************************/
 
@@ -56,22 +56,22 @@ SDL_Texture *Engine::loadTextureFromFile(string filePath) {
 
   return texture;
 }
-void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location) {
-
-  int w,h;
-  SDL_QueryTexture(texture,NULL,NULL,&w,&h);
-  renderTexture(texture,location.x,location.y,w,h);
-}
-void Engine::renderTexture(SDL_Texture *texture, int x, int y, int w, int h) {
+void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location,
+    SDL_Rect *clip = NULL) {
 
   SDL_Rect dst;
-  dst.x = x;
-  dst.y = y;
-  dst.w = w;
-  dst.h = h;
-
-  SDL_RenderCopy(m_renderer,texture,NULL,&dst);
-} 
+  dst.x = location.x;
+  dst.y = location.y;
+  
+  if(clip != NULL) {
+  dst.w = clip->w;
+  dst.h = clip->h;
+  }else {
+    SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
+  }
+  
+  SDL_RenderCopy(m_renderer,texture,clip,&dst);
+}
 void Engine::renderActor(shared_ptr<Actor> a) {
 
   renderTexture(a->getTexture(),*a->getPosition());
@@ -98,7 +98,7 @@ void Engine::event() {
 void Engine::tick() {
 
   SDL_RenderClear(m_renderer);
-  
+
   //Trap events
   event();
 
