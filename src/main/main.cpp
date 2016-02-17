@@ -2,7 +2,7 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-17 17:54]
+ *     Last Modified       :     [2016-02-17 17:57]
  *     Description         :      
  **********************************************************************************/
 
@@ -28,6 +28,8 @@ int main(int argc, char **argv) {
 
 
   shared_ptr<Actor> a = make_shared<Actor>(tex,0,100);
+  
+  shared_ptr<Actor> b = make_shared<Actor>(tex,50,50);
 
   shared_ptr<SDL_Rect> size = a->getSize();
 
@@ -44,7 +46,7 @@ int main(int argc, char **argv) {
   shared_ptr<Scene> s = make_shared<Scene>();
 
   s->addActor(a);
-
+  s->addActor(b);
   eng->addScene(s);
 
   int c =0;
