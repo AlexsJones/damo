@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-02-16 23:00]
+ *     Last Modified       :     [2016-02-17 13:36]
  *     Description         :      
  **********************************************************************************/
 
@@ -11,7 +11,9 @@
 #include <SDL2/SDL.h>
 #include "utilities.hpp"
 #include "actor.hpp"
+#include "scene.hpp"
 #include "types.hpp"
+#include <list>
 #include <memory>
 
 using namespace std;
@@ -24,7 +26,7 @@ class Engine {
 
     ~Engine();
 
-    void Tick(void);
+    void tick(void);
 
     SDL_Texture *loadTextureFromFile(string filePath);
 
@@ -34,11 +36,17 @@ class Engine {
     
     void renderActor(shared_ptr<Actor> a);
 
+    void renderScene(shared_ptr<Scene> s);
+
+    void addScene(shared_ptr<Scene> s);
+
     SDL_Renderer *m_renderer;
  
   private:
 
     SDL_Window *m_window;
+
+    list<shared_ptr<Scene>> m_scenes;
 
     int m_width;
 

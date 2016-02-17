@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-16 23:03]
+ *     Last Modified       :     [2016-02-17 13:36]
  *     Description         :      
  **********************************************************************************/
 
@@ -48,7 +48,7 @@ Engine::~Engine() {
 SDL_Texture *Engine::loadTextureFromFile(string filePath) {
 
   SDL_Texture *texture = IMG_LoadTexture(m_renderer,
-        filePath.c_str());
+      filePath.c_str());
   if(texture == NULL) {
     cerr << "loadTextureFromFile:" << SDL_GetError() << endl;
   }
@@ -56,7 +56,7 @@ SDL_Texture *Engine::loadTextureFromFile(string filePath) {
   return texture;
 }
 void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location) {
-  
+
   int w,h;
   SDL_QueryTexture(texture,NULL,NULL,&w,&h);
   renderTexture(texture,location.x,location.y,w,h);
@@ -75,12 +75,24 @@ void Engine::renderActor(shared_ptr<Actor> a) {
 
   renderTexture(a->getTexture(),*a->getPosition());
 }
-void Engine::Tick() {
-  
-    SDL_RenderClear(m_renderer);
+void Engine::renderScene(shared_ptr<Scene> s) {
 
-    // Loop all scenes
-    // Loop all actors
+  for(auto a : s->getActors()) {
+    renderActor(a); 
+  }
 
-    SDL_RenderPresent(m_renderer);
+}
+void Engine::tick() {
+
+  SDL_RenderClear(m_renderer);
+
+  for(auto s : m_scenes) {
+    renderScene(s);
+  }
+
+  SDL_RenderPresent(m_renderer);
+}
+void Engine::addScene(shared_ptr<Scene> s) {
+
+  m_scenes.push_back(s);
 }

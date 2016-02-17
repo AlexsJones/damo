@@ -2,20 +2,21 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-17 08:21]
+ *     Last Modified       :     [2016-02-17 13:36]
  *     Description         :      
  **********************************************************************************/
 
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "engine.hpp"
+#include "scene.hpp"
 #include <memory>
 using namespace std;
 
 int main(int argc, char **argv) {
 
 
-  shared_ptr<Engine> eng = make_shared<Engine>(640,480); 
+  unique_ptr<Engine> eng = make_unique<Engine>(640,480); 
 
   string imagePath = getResourcePath("test") + "/image.png";
 
@@ -41,24 +42,37 @@ int main(int argc, char **argv) {
   int yt = 480 / 40;
 
 
+  shared_ptr<Scene> s = make_shared<Scene>();
 
-  for(int x = 0; x < 300; ++x){
-    SDL_RenderClear(eng->m_renderer);
+  s->addActor(a);
 
+  eng->addScene(s);
 
-    for(int i =0; i < xt  * yt; ++i) {
-      int _x = i % xt;
-      int _y = i / xt;
-
-      eng->renderTexture(textwo,_x * 40, _y * 40, 40,40);
-    }  
-
-    eng->renderActor(a);
-
-    SDL_RenderPresent(eng->m_renderer);
+  while(1) {
+  
+    eng->tick();
+  
   }
 
 
+
+  /*
+     for(int x = 0; x < 300; ++x){
+     SDL_RenderClear(eng->m_renderer);
+
+
+     for(int i =0; i < xt  * yt; ++i) {
+     int _x = i % xt;
+     int _y = i / xt;
+
+     eng->renderTexture(textwo,_x * 40, _y * 40, 40,40);
+     }  
+
+     eng->renderActor(a);
+
+     SDL_RenderPresent(eng->m_renderer);
+     }
+     */
 
   return 0;
 }
