@@ -2,7 +2,7 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-19 14:01]
+ *     Last Modified       :     [2016-02-19 14:08]
  *     Description         :      
  **********************************************************************************/
 
@@ -42,8 +42,6 @@ int main(int argc, char **argv) {
   shared_ptr<IScene> s = make_shared<Scene>();
   s->addActor(a);
   eng->addScene(s);
-
-
 
 
 

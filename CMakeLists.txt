@@ -13,12 +13,14 @@ add_subdirectory(src/utils)
 add_subdirectory(src/engine)
 add_subdirectory(src/engine/actor)
 add_subdirectory(src/engine/scene)
+add_subdirectory(src/engine/landscape)
 
 include_directories(${PROJECT_INC_DIR}src/main)
 include_directories(${PROJECT_INC_DIR}src/utils)
 include_directories(${PROJECT_INC_DIR}src/engine)
 include_directories(${PROJECT_INC_DIR}src/engine/actor)
 include_directories(${PROJECT_INC_DIR}src/engine/scene)
+include_directories(${PROJECT_INC_DIR}src/engine/landscape)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++14")
 
