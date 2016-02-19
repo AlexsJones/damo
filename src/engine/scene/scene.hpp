@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/scene.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-17 10:23]
- *     Last Modified       :     [2016-02-19 12:29]
+ *     Last Modified       :     [2016-02-19 14:00]
  *     Description         :      
  **********************************************************************************/
 
@@ -18,7 +18,7 @@ using namespace std;
 class Scene : public IScene {
 
   public:
-   
+
     ~Scene();
 
     void addActor(shared_ptr<IActor> a);

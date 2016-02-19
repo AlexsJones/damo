@@ -2,11 +2,11 @@
  *     File Name           :     src/engine/scene/iscene.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-19 12:05]
- *     Last Modified       :     [2016-02-19 12:34]
+ *     Last Modified       :     [2016-02-19 12:54]
  *     Description         :      
  **********************************************************************************/
 #ifndef __ISCENE_HPP__
-#define __SCENE_HPP__
+#define __ISCENE_HPP__
 #include "iactor.hpp"
 #include <memory>
 #include <list>
