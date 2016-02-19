@@ -2,17 +2,19 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-17 22:20]
+ *     Last Modified       :     [2016-02-19 12:51]
  *     Description         :      
  **********************************************************************************/
 
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "engine.hpp"
+#include "actor.hpp"
 #include "scene.hpp"
 #include <memory>
 #include <thread>
 using namespace std;
+
 int main(int argc, char **argv) {
 
 
@@ -22,7 +24,6 @@ int main(int argc, char **argv) {
 
 
   SDL_Texture *tex = eng->loadTextureFromFile(imagePath);
-
 
   shared_ptr<Actor> a = make_shared<Actor>(tex,0,100);
 
@@ -37,11 +38,16 @@ int main(int argc, char **argv) {
 
   int xt = 640 / 40;
   int yt = 480 / 40;
-
+  
+  shared_ptr<IScene> s = make_shared<Scene>();
+/*
   shared_ptr<Scene> s = make_shared<Scene>();
-
   s->addActor(a);
   eng->addScene(s);
+
+
+
+
 
   while(!eng->IsExiting()) {
     eng->tick();

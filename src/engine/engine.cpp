@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-17 22:17]
+ *     Last Modified       :     [2016-02-19 12:04]
  *     Description         :      
  **********************************************************************************/
 
@@ -72,11 +72,11 @@ void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location,
   
   SDL_RenderCopy(m_renderer,texture,clip,&dst);
 }
-void Engine::renderActor(shared_ptr<Actor> a) {
+void Engine::renderActor(shared_ptr<IActor> a) {
 
   renderTexture(a->getTexture(),*a->getPosition());
 }
-void Engine::renderScene(shared_ptr<Scene> s) {
+void Engine::renderScene(shared_ptr<IScene> s) {
 
   for(auto a : s->getActors()) {
     renderActor(a); 
@@ -108,7 +108,7 @@ void Engine::tick() {
 
   SDL_RenderPresent(m_renderer);
 }
-void Engine::addScene(shared_ptr<Scene> s) {
+void Engine::addScene(shared_ptr<IScene> s) {
 
   m_scenes.push_back(s);
 }

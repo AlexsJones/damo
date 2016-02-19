@@ -11,10 +11,14 @@ execute_process(COMMAND sudo make install . WORKING_DIRECTORY jnxlibc)
 add_subdirectory(src/main)
 add_subdirectory(src/utils)
 add_subdirectory(src/engine)
+add_subdirectory(src/engine/actor)
+add_subdirectory(src/engine/scene)
 
 include_directories(${PROJECT_INC_DIR}src/main)
 include_directories(${PROJECT_INC_DIR}src/utils)
 include_directories(${PROJECT_INC_DIR}src/engine)
+include_directories(${PROJECT_INC_DIR}src/engine/actor)
+include_directories(${PROJECT_INC_DIR}src/engine/scene)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++14")
 

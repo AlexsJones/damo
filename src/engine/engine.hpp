@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-02-17 22:16]
+ *     Last Modified       :     [2016-02-19 12:03]
  *     Description         :      
  **********************************************************************************/
 
@@ -10,8 +10,8 @@
 #define __ENGINE_HPP__
 #include <SDL2/SDL.h>
 #include "utilities.hpp"
-#include "actor.hpp"
-#include "scene.hpp"
+#include "iactor.hpp"
+#include "iscene.hpp"
 #include <list>
 #include <memory>
 
@@ -34,11 +34,11 @@ class Engine {
     void renderTexture(SDL_Texture *texture, SDL_Rect location,
         SDL_Rect *clip); 
 
-    void renderActor(shared_ptr<Actor> a);
+    void renderActor(shared_ptr<IActor> a);
 
-    void renderScene(shared_ptr<Scene> s);
+    void renderScene(shared_ptr<IScene> s);
 
-    void addScene(shared_ptr<Scene> s);
+    void addScene(shared_ptr<IScene> s);
 
     bool IsExiting(void);
 
@@ -48,7 +48,7 @@ class Engine {
 
     SDL_Window *m_window;
 
-    list<shared_ptr<Scene>> m_scenes;
+    list<shared_ptr<IScene>> m_scenes;
 
     int m_width;
 

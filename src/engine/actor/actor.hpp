@@ -2,12 +2,13 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2016-02-17 17:48]
+*     Last Modified       :     [2016-02-19 11:57]
 *     Description         :      
 **********************************************************************************/
 
 #ifndef __ACTOR_HPP__
 #define __ACTOR_HPP__
+#include "iactor.hpp"
 #include "utilities.hpp"
 #include <jnxc_headers/jnxguid.h>
 #include <SDL2/SDL.h>
@@ -15,7 +16,7 @@
 
 using namespace std;
 
-class Actor {
+class Actor : public IActor {
 
   public:
 
