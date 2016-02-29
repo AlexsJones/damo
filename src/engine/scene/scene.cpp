@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/damo/src/engine/scene.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-17 10:24]
- *     Last Modified       :     [2016-02-19 12:31]
+ *     Last Modified       :     [2016-02-29 21:44]
  *     Description         :      
  **********************************************************************************/
 
@@ -25,3 +25,11 @@ void Scene::removeActor(shared_ptr<IActor> a) {
   m_actorList.remove(a);
 }
 
+void Scene::addLandscape(shared_ptr<ILandscape> l) {
+  
+  m_landscapeList.push_back(l);
+}
+void Scene::removeLandscape(shared_ptr<ILandscape> l) {
+
+  m_landscapeList.remove(l);
+}

@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-19 12:04]
+ *     Last Modified       :     [2016-02-29 21:46]
  *     Description         :      
  **********************************************************************************/
 
@@ -62,14 +62,14 @@ void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location,
   SDL_Rect dst;
   dst.x = location.x;
   dst.y = location.y;
-  
+
   if(clip != NULL) {
-  dst.w = clip->w;
-  dst.h = clip->h;
+    dst.w = clip->w;
+    dst.h = clip->h;
   }else {
     SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
   }
-  
+
   SDL_RenderCopy(m_renderer,texture,clip,&dst);
 }
 void Engine::renderActor(shared_ptr<IActor> a) {
