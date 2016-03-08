@@ -2,7 +2,7 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2016-02-19 11:57]
+*     Last Modified       :     [2016-03-08 09:35]
 *     Description         :      
 **********************************************************************************/
 
@@ -42,6 +42,5 @@ class Actor : public IActor {
     shared_ptr<SDL_Rect> m_currentPosition;
 
 };
-
 
 #endif

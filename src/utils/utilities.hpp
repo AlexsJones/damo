@@ -2,7 +2,7 @@
  *     File Name           :     src/utils/resourcefinder.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 15:19]
- *     Last Modified       :     [2016-02-16 17:53]
+ *     Last Modified       :     [2016-03-08 09:41]
  *     Description         :      
  **********************************************************************************/
 
@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include <utility>
+#include <jnxc_headers/jnxlog.h>
 #include <SDL2/SDL.h>
 
 using namespace std;
@@ -22,11 +23,11 @@ static string  getResourcePath(const string &subdir ="") {
 
   if(m_baseRes == NULL) {
     char *basePath = SDL_GetBasePath();
-
+    
     if(basePath) {
 
       m_baseRes = new string(basePath);
-
+  
       SDL_free(basePath);
     }else {
       cerr << "Error getting resource path: " << SDL_GetError() << endl;
@@ -35,7 +36,7 @@ static string  getResourcePath(const string &subdir ="") {
 
   }
   string str;
-
+  JNXLOG(LDEBUG,"Base log path %s", m_baseRes)
   str.append(*m_baseRes);
   str.append("resources/");
   str.append(subdir);

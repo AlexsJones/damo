@@ -2,7 +2,7 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2016-02-19 14:08]
+ *     Last Modified       :     [2016-03-08 09:31]
  *     Description         :      
  **********************************************************************************/
 
@@ -17,11 +17,9 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-
   shared_ptr<Engine> eng = make_shared<Engine>(640,480); 
 
   string imagePath = getResourcePath("test") + "/image.png";
-
 
   SDL_Texture *tex = eng->loadTextureFromFile(imagePath);
 

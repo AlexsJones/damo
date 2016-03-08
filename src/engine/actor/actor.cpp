@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2016-02-19 10:47]
+ *     Last Modified       :     [2016-03-08 09:35]
  *     Description         :      
  **********************************************************************************/
 
@@ -37,7 +37,6 @@ shared_ptr<SDL_Rect> Actor::getSize(void) {
 
   int w,h;
   SDL_QueryTexture(m_texture,NULL,NULL,&w,&h);
-
   shared_ptr<SDL_Rect> r = make_shared<SDL_Rect>();
   r->w = w;
   r->h = h;
