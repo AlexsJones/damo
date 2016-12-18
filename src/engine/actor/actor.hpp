@@ -2,7 +2,7 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2016-03-08 09:35]
+*     Last Modified       :     [2016-12-18 18:19]
 *     Description         :      
 **********************************************************************************/
 
@@ -10,7 +10,7 @@
 #define __ACTOR_HPP__
 #include "iactor.hpp"
 #include "utilities.hpp"
-#include <jnxc_headers/jnxguid.h>
+#include <jnxc_headers/jnx_guid.h>
 #include <SDL2/SDL.h>
 #include <memory>
 

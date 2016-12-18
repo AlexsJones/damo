@@ -2,7 +2,7 @@
  *     File Name           :     src/utils/resourcefinder.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 15:19]
- *     Last Modified       :     [2016-03-08 09:41]
+ *     Last Modified       :     [2016-12-18 18:25]
  *     Description         :      
  **********************************************************************************/
 
@@ -11,7 +11,7 @@
 #include <string>
 #include <iostream>
 #include <utility>
-#include <jnxc_headers/jnxlog.h>
+#include <jnxc_headers/jnx_log.h>
 #include <SDL2/SDL.h>
 
 using namespace std;
@@ -23,7 +23,6 @@ static string  getResourcePath(const string &subdir ="") {
 
   if(m_baseRes == NULL) {
     char *basePath = SDL_GetBasePath();
-    
     if(basePath) {
 
       m_baseRes = new string(basePath);
@@ -36,11 +35,10 @@ static string  getResourcePath(const string &subdir ="") {
 
   }
   string str;
-  JNXLOG(LDEBUG,"Base log path %s", m_baseRes)
   str.append(*m_baseRes);
-  str.append("resources/");
   str.append(subdir);
 
+  JNXLOG(LDEBUG,"Base log path %s", str.c_str());
   return str;
 } 
 template<typename T, typename... Args>
