@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-02-22 22:38]
+ *     Last Modified       :     [2016-12-20 14:37]
  *     Description         :      
  **********************************************************************************/
 
@@ -21,7 +21,7 @@ class Engine {
 
   public:
 
-    Engine(int width, int height);
+    Engine(int width, int height,bool is_fullscreen=false);
 
     ~Engine();
 

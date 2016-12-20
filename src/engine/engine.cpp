@@ -2,14 +2,15 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-02-29 21:46]
+ *     Last Modified       :     [2016-12-20 14:56]
  *     Description         :      
  **********************************************************************************/
 
 #include "engine.hpp"
 #include <SDL2/SDL_image.h>
 
-Engine::Engine(int width, int height):m_width(width),m_height(height) {
+Engine::Engine(int width, int height,bool is_fullscreen):
+  m_width(width),m_height(height) {
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     cout << "SDL_Init Error: " << SDL_GetError() << endl;
@@ -20,8 +21,10 @@ Engine::Engine(int width, int height):m_width(width),m_height(height) {
     cerr << "IMG_INIT:" << SDL_GetError() << endl;
     exit(1);
   }
-
-  m_window = SDL_CreateWindow("Damo",100, 100, width, height,
+  
+  m_window = SDL_CreateWindow("Damo",SDL_WINDOWPOS_UNDEFINED, 
+      SDL_WINDOWPOS_UNDEFINED
+      , width, height,
       SDL_WINDOW_SHOWN);
 
   if(m_window == NULL) {
@@ -29,7 +32,11 @@ Engine::Engine(int width, int height):m_width(width),m_height(height) {
     SDL_Quit();
     exit(1);
   }
-
+  
+  if(is_fullscreen){
+    SDL_SetWindowFullscreen(m_window,SDL_WINDOW_FULLSCREEN_DESKTOP );
+  }
+  
   m_renderer = SDL_CreateRenderer(m_window, -1 ,
       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -88,9 +95,6 @@ void Engine::event() {
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
     if(e.type == SDL_QUIT) {
-      b_shouldExit = true;
-    }
-    if(e.type == SDL_KEYDOWN) {
       b_shouldExit = true;
     }
   }
