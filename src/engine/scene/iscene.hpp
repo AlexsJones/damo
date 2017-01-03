@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/scene/iscene.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-19 12:05]
- *     Last Modified       :     [2016-02-29 21:39]
+ *     Last Modified       :     [2017-01-03 20:22]
  *     Description         :      
  **********************************************************************************/
 #ifndef __ISCENE_HPP__
@@ -18,8 +18,6 @@ class IScene {
 
   public:
 
-    virtual ~IScene() {};
-  
     virtual void addActor(shared_ptr<IActor> a) = 0;
 
     virtual void removeActor(shared_ptr<IActor> a) = 0;

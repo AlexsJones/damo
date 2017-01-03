@@ -2,50 +2,63 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2016-03-08 09:35]
+ *     Last Modified       :     [2017-01-03 22:15]
  *     Description         :      
  **********************************************************************************/
 
 #include "actor.hpp"
 #include "utilities.hpp"
 
-Actor::Actor(SDL_Texture *texture, int x, int y):
-  m_texture(texture){
-    m_currentPosition = make_shared<SDL_Rect>();
-    m_currentPosition->x = x;
-    m_currentPosition->y = y;
+Actor::Actor(int x, int y) { 
+  jnx_guid_create(&m_guid);
 
-    jnx_guid_create(&m_guid);
+  m_currentPosition->x = x;
 
-    cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
-  }
-Actor::~Actor() {
+  m_currentPosition->y = y;
+
+  cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
+}
+Actor::~Actor(void) {
 
   if(m_texture) {
     cleanup(m_texture);
   }
 }
-SDL_Texture *Actor::getTexture(void) {
+void Actor::setTexture(SDL_Texture *tex) {
 
+  m_texture = tex;
+
+  m_currentPosition = make_shared<SDL_Rect>();
+
+}
+shared_ptr<SDL_Rect> Actor::getTextureSize(void) {
+
+  shared_ptr<SDL_Rect> r = make_shared<SDL_Rect>();
+  r->w = 0;
+  r->h = 0;
+
+  if(m_texture) {
+    int w,h;
+    SDL_QueryTexture(m_texture,NULL,NULL,&w,&h);
+    r->w = w;
+    r->h = h;
+  }
+  return r;
+}
+SDL_Texture *Actor::getTexture(void) {
+  if(!m_texture) return NULL;
   return m_texture;
 }
 shared_ptr<SDL_Rect> Actor::getPosition(void) {
 
   return m_currentPosition;
 }
-shared_ptr<SDL_Rect> Actor::getSize(void) {
-
-  int w,h;
-  SDL_QueryTexture(m_texture,NULL,NULL,&w,&h);
-  shared_ptr<SDL_Rect> r = make_shared<SDL_Rect>();
-  r->w = w;
-  r->h = h;
-
-  return r;
-}
 void Actor::setPosition(int x, int y) {
   m_currentPosition->x = x;
   m_currentPosition->y = y;
+}
+void Actor::setPosition(shared_ptr<SDL_Rect> pos) {
+  m_currentPosition = pos;
 }
 string Actor::getUniqueIdentifier(void) {
   jnx_char *str;

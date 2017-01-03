@@ -2,7 +2,7 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2016-12-20 14:54]
+*     Last Modified       :     [2017-01-03 22:15]
 *     Description         :      
 **********************************************************************************/
 
@@ -16,23 +16,27 @@
 
 using namespace std;
 
-class Actor : public IActor {
+class Actor : public IActor  {
 
   public:
+    void setTexture(SDL_Texture *tex);
+
+    shared_ptr<SDL_Rect> getTextureSize(void);
 
     SDL_Texture *getTexture(void);
 
     void setPosition(int x, int y);
 
+    void setPosition(shared_ptr<SDL_Rect> pos);
+    
     shared_ptr<SDL_Rect> getPosition(void);
-
-    shared_ptr<SDL_Rect> getSize(void);
 
     string getUniqueIdentifier(void);
 
-    Actor(SDL_Texture *texture,int x, int y);
+    Actor(int x, int y);
 
-    ~Actor();
+    ~Actor(void);
+
   private:
 
     jnx_guid m_guid;
@@ -40,7 +44,6 @@ class Actor : public IActor {
     SDL_Texture *m_texture;
 
     shared_ptr<SDL_Rect> m_currentPosition;
-
 };
 
 #endif
