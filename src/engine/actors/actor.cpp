@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-01-04 09:22]
+ *     Last Modified       :     [2017-01-04 09:33]
  *     Description         :      
  **********************************************************************************/
 
@@ -21,7 +21,8 @@ Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
   , m_currentPosition(make_shared<SDL_Rect>()) {
 
     setPosition(x,y);
-
+    
+    setTexture(load(path,ref_renderer));
   }
 Actor::Actor(int x, int y, SDL_Renderer *renderer):
   ref_renderer(renderer)

@@ -2,7 +2,7 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2017-01-04 08:45]
+*     Last Modified       :     [2017-01-04 09:34]
 *     Description         :      
 **********************************************************************************/
 
@@ -48,7 +48,7 @@ class Actor : public IActor, public TextureLoader  {
 
     SDL_Texture *m_texture;
 
-    const SDL_Renderer *ref_renderer;
+    SDL_Renderer *ref_renderer;
 
     shared_ptr<SDL_Rect> m_currentPosition;
 };
