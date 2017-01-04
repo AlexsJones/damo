@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2016-12-27 01:30]
+ *     Last Modified       :     [2017-01-04 08:47]
  *     Description         :      
  **********************************************************************************/
 
@@ -42,10 +42,12 @@ class Engine {
 
     bool IsExiting(void);
 
-    SDL_Renderer *m_renderer;
+    SDL_Renderer *getRenderer(void);
 
   private:
 
+    SDL_Renderer *m_renderer;
+    
     SDL_Window *m_window;
 
     list<shared_ptr<IScene>> m_scenes;

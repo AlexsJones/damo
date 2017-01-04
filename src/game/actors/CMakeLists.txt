@@ -4,7 +4,6 @@ PARENT_SCOPE)
 
 set(HEADERS
 ${HEADERS}
-${CMAKE_CURRENT_SOURCE_DIR}/game_actors.hpp
 ${CMAKE_CURRENT_SOURCE_DIR}/test_actors.hpp
 PARENT_SCOPE)
 

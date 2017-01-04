@@ -24,19 +24,22 @@ set(jnxlibc_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${jnxlibc_INSTALL_DIR})
 #add_library(jnxlibcs STATIC IMPORTED)
 
 add_subdirectory(src/game)
+add_subdirectory(src/game/actors)
 add_subdirectory(src/utils)
 add_subdirectory(src/engine)
-add_subdirectory(src/engine/actor)
-add_subdirectory(src/engine/scene)
-add_subdirectory(src/engine/landscape)
+add_subdirectory(src/engine/actors)
+add_subdirectory(src/engine/scenes)
+add_subdirectory(src/engine/landscapes)
+add_subdirectory(src/engine/loaders)
 
 include_directories(${PROJECT_INC_DIR}src/game)
-#include_directories(${PROJECT_INC_DIR}src/game/actors)
+include_directories(${PROJECT_INC_DIR}src/game/actors)
 include_directories(${PROJECT_INC_DIR}src/utils)
 include_directories(${PROJECT_INC_DIR}src/engine)
-include_directories(${PROJECT_INC_DIR}src/engine/actor)
-include_directories(${PROJECT_INC_DIR}src/engine/scene)
-include_directories(${PROJECT_INC_DIR}src/engine/landscape)
+include_directories(${PROJECT_INC_DIR}src/engine/actors)
+include_directories(${PROJECT_INC_DIR}src/engine/scenes)
+include_directories(${PROJECT_INC_DIR}src/engine/landscapes)
+include_directories(${PROJECT_INC_DIR}src/engine/loaders)
 
 if(APPLE)
   # set_property(TARGET jnxlibc PROPERTY IMPORTED_LOCATION ${jnxlibc_INSTALL_DIR}/lib/libjnxc.dylib)
@@ -46,7 +49,7 @@ endif()
 #set_property(TARGET jnxlibcs PROPERTY IMPORTED_LOCATION ${jnxlibc_INSTALL_DIR}/lib/libjnxc.a)
 
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++14 -g")
 
 add_executable(damo ${SOURCE})
 

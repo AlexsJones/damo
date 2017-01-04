@@ -2,22 +2,37 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-01-03 22:15]
+ *     Last Modified       :     [2017-01-04 09:22]
  *     Description         :      
  **********************************************************************************/
 
 #include "actor.hpp"
 #include "utilities.hpp"
 
-Actor::Actor(int x, int y) { 
-  jnx_guid_create(&m_guid);
+Actor::Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture):
+  ref_renderer(renderer), m_currentPosition(make_shared<SDL_Rect>()) {
 
-  m_currentPosition->x = x;
+    setPosition(x,y);
 
-  m_currentPosition->y = y;
+    setTexture(texture);
+  }
+Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
+  ref_renderer(renderer)
+  , m_currentPosition(make_shared<SDL_Rect>()) {
 
-  cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
-}
+    setPosition(x,y);
+
+  }
+Actor::Actor(int x, int y, SDL_Renderer *renderer):
+  ref_renderer(renderer)
+  , m_currentPosition(make_shared<SDL_Rect>()) {
+
+    jnx_guid_create(&m_guid);
+
+    setPosition(x,y);
+
+    cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
+  }
 Actor::~Actor(void) {
 
   if(m_texture) {
@@ -28,7 +43,6 @@ void Actor::setTexture(SDL_Texture *tex) {
 
   m_texture = tex;
 
-  m_currentPosition = make_shared<SDL_Rect>();
 
 }
 shared_ptr<SDL_Rect> Actor::getTextureSize(void) {

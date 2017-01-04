@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2016-12-20 14:56]
+ *     Last Modified       :     [2017-01-04 08:49]
  *     Description         :      
  **********************************************************************************/
 
@@ -119,4 +119,7 @@ void Engine::addScene(shared_ptr<IScene> s) {
 bool Engine::IsExiting(void) {
 
   return b_shouldExit;
+}
+SDL_Renderer* Engine::getRenderer(void) {
+  return m_renderer;
 }
