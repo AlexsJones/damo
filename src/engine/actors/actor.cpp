@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-01-04 09:33]
+ *     Last Modified       :     [2017-01-11 08:38]
  *     Description         :      
  **********************************************************************************/
 
@@ -81,4 +81,8 @@ string Actor::getUniqueIdentifier(void) {
   string output(str);
   free(str);
   return output;
+}
+void Actor::tickEvent(SDL_Event *event) {
+
+
 }

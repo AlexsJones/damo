@@ -2,13 +2,14 @@
 *     File Name           :     src/engine/actor.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2017-01-04 09:34]
+*     Last Modified       :     [2017-01-11 08:39]
 *     Description         :      
 **********************************************************************************/
 
 #ifndef __ACTOR_HPP__
 #define __ACTOR_HPP__
 #include "iactor.hpp"
+#include "ievent.hpp"
 #include "utilities.hpp"
 #include "textureloader.hpp"
 #include <jnxc_headers/jnx_guid.h>
@@ -17,7 +18,7 @@
 
 using namespace std;
 
-class Actor : public IActor, public TextureLoader  {
+class Actor : public IActor, public IEvent, public TextureLoader  {
 
   public:
     void setTexture(SDL_Texture *tex);
@@ -33,6 +34,8 @@ class Actor : public IActor, public TextureLoader  {
     shared_ptr<SDL_Rect> getPosition(void);
 
     string getUniqueIdentifier(void);
+ 
+    void tickEvent(SDL_Event *event);
 
     Actor(int x, int y, SDL_Renderer *renderer);
     

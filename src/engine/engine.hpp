@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2017-01-04 08:47]
+ *     Last Modified       :     [2017-01-11 09:02]
  *     Description         :      
  **********************************************************************************/
 
@@ -27,16 +27,14 @@ class Engine {
 
     void tick(void);
 
-    void event(void);
-
     SDL_Texture *loadTextureFromFile(string filePath);
 
     void renderTexture(SDL_Texture *texture, SDL_Rect location,
         SDL_Rect *clip); 
 
-    void renderActor(shared_ptr<IActor> a);
+    void renderActor(shared_ptr<IActor> a, SDL_Event *e);
 
-    void renderScene(shared_ptr<IScene> s);
+    void renderScene(shared_ptr<IScene> s, SDL_Event *e);
 
     void addScene(shared_ptr<IScene> s);
 
