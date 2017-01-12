@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2017-01-11 09:02]
+ *     Last Modified       :     [2017-01-12 09:54]
  *     Description         :      
  **********************************************************************************/
 
@@ -14,7 +14,7 @@
 #include "iscene.hpp"
 #include <list>
 #include <memory>
-
+#include "engineconstraints.hpp"
 using namespace std;
 
 class Engine {
@@ -29,7 +29,7 @@ class Engine {
 
     SDL_Texture *loadTextureFromFile(string filePath);
 
-    void renderTexture(SDL_Texture *texture, SDL_Rect location,
+    void renderTexture(SDL_Texture *texture, shared_ptr<SDL_Rect> location,
         SDL_Rect *clip); 
 
     void renderActor(shared_ptr<IActor> a, SDL_Event *e);

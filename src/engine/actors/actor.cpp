@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-01-11 08:38]
+ *     Last Modified       :     [2017-01-12 10:00]
  *     Description         :      
  **********************************************************************************/
 
@@ -21,7 +21,7 @@ Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
   , m_currentPosition(make_shared<SDL_Rect>()) {
 
     setPosition(x,y);
-    
+
     setTexture(load(path,ref_renderer));
   }
 Actor::Actor(int x, int y, SDL_Renderer *renderer):
@@ -82,7 +82,43 @@ string Actor::getUniqueIdentifier(void) {
   free(str);
   return output;
 }
-void Actor::tickEvent(SDL_Event *event) {
+void Actor::tickEvent(SDL_Event *e) {
 
+  int xval = 0;
+  int yval = 0;
 
+  SDL_Event event = *e;
+    if(event.type == SDL_KEYDOWN){ 
+      switch(event.key.keysym.sym) {
+        case SDLK_UP:
+          yval = -1;
+          break;
+        case SDLK_DOWN:
+          yval= +1;
+          break;
+        case SDLK_LEFT:
+          xval = -1;
+          break;
+        case SDLK_RIGHT:
+          xval = +1;
+          break;
+      }
+    }
+
+    if(event.type == SDL_KEYUP) {
+      switch(event.key.keysym.sym) {
+        case SDLK_UP:
+          break;
+        case SDLK_DOWN:
+          break;
+        case SDLK_LEFT:
+          break;
+        case SDLK_RIGHT:
+
+          break;
+
+      }
+    }
+  m_currentPosition->x += xval;
+  m_currentPosition->y += yval;
 }

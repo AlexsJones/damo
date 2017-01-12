@@ -2,7 +2,7 @@
  *     File Name           :     src/main/main.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 14:58]
- *     Last Modified       :     [2017-01-04 17:53]
+ *     Last Modified       :     [2017-01-12 09:51]
  *     Description         :      
  **********************************************************************************/
 
@@ -30,6 +30,6 @@ int main(int argc, char **argv) {
 
   while(!eng->IsExiting()) {
     eng->tick();
-   }
+  }
   return 0;
 }

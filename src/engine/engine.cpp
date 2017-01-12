@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2017-01-11 09:02]
+ *     Last Modified       :     [2017-01-12 09:58]
  *     Description         :      
  **********************************************************************************/
 
@@ -63,13 +63,14 @@ SDL_Texture *Engine::loadTextureFromFile(string filePath) {
 
   return texture;
 }
-void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location,
+void Engine::renderTexture(SDL_Texture *texture, shared_ptr<SDL_Rect> location,
     SDL_Rect *clip = NULL) {
 
   SDL_Rect dst;
-  dst.x = location.x;
-  dst.y = location.y;
+  dst.x = location->x;
+  dst.y = location->y;
 
+  std::cout << "x:" << dst.x << " y:" << dst.y << std::endl;
   if(clip != NULL) {
     dst.w = clip->w;
     dst.h = clip->h;
@@ -81,7 +82,11 @@ void Engine::renderTexture(SDL_Texture *texture, SDL_Rect location,
 }
 void Engine::renderActor(shared_ptr<IActor> a, SDL_Event *e) {
 
-  renderTexture(a->getTexture(),*a->getPosition());
+  if(a->isEventEnabled()) {
+    a->tickEvent(e);
+  }
+
+  renderTexture(a->getTexture(),a->getPosition());
 }
 void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
 
