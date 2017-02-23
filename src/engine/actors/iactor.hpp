@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/actor/iactor.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-19 11:51]
- *     Last Modified       :     [2017-01-11 18:17]
+ *     Last Modified       :     [2017-02-23 15:28]
  *     Description         :      
  **********************************************************************************/
 
@@ -10,6 +10,7 @@
 #define __IACTOR_HPP__
 #include <memory>
 #include <SDL2/SDL.h>
+#include <jnxc_headers/jnx_guid.h>
 #include "ievent.hpp"
 using namespace std;
 
@@ -29,11 +30,19 @@ class IActor : public IEvent {
 
     virtual SDL_Texture* getTexture(void) = 0;
 
-    virtual string getUniqueIdentifier(void) = 0;
-  
+    string getUniqueIdentifier(void) {
+      jnx_char *str;
+      jnx_guid_to_string(&m_guid,&str);
+      string output(str);
+      free(str);
+      return output;
+    };
+
     virtual void tickEvent(SDL_Event *e) = 0;
 
     virtual bool isEventEnabled(void) = 0;
+
+    jnx_guid m_guid;
 };
 
 #endif

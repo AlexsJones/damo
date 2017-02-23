@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/engine.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:27]
- *     Last Modified       :     [2017-01-12 09:54]
+ *     Last Modified       :     [2017-02-23 15:10]
  *     Description         :      
  **********************************************************************************/
 
@@ -10,6 +10,7 @@
 #define __ENGINE_HPP__
 #include <SDL2/SDL.h>
 #include "utilities.hpp"
+#include "ilandscape.hpp"
 #include "iactor.hpp"
 #include "iscene.hpp"
 #include <list>
@@ -27,13 +28,13 @@ class Engine {
 
     void tick(void);
 
-    SDL_Texture *loadTextureFromFile(string filePath);
-
     void renderTexture(SDL_Texture *texture, shared_ptr<SDL_Rect> location,
         SDL_Rect *clip); 
 
     void renderActor(shared_ptr<IActor> a, SDL_Event *e);
 
+    void renderLandscape(shared_ptr<ILandscape> l, SDL_Event *e);
+    
     void renderScene(shared_ptr<IScene> s, SDL_Event *e);
 
     void addScene(shared_ptr<IScene> s);

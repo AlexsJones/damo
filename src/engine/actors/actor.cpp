@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-01-12 10:00]
+ *     Last Modified       :     [2017-02-23 15:26]
  *     Description         :      
  **********************************************************************************/
 
@@ -75,50 +75,26 @@ void Actor::setPosition(int x, int y) {
 void Actor::setPosition(shared_ptr<SDL_Rect> pos) {
   m_currentPosition = pos;
 }
-string Actor::getUniqueIdentifier(void) {
-  jnx_char *str;
-  jnx_guid_to_string(&m_guid,&str);
-  string output(str);
-  free(str);
-  return output;
-}
 void Actor::tickEvent(SDL_Event *e) {
 
   int xval = 0;
   int yval = 0;
 
   SDL_Event event = *e;
-    if(event.type == SDL_KEYDOWN){ 
-      switch(event.key.keysym.sym) {
-        case SDLK_UP:
-          yval = -1;
-          break;
-        case SDLK_DOWN:
-          yval= +1;
-          break;
-        case SDLK_LEFT:
-          xval = -1;
-          break;
-        case SDLK_RIGHT:
-          xval = +1;
-          break;
-      }
+  if(event.type == SDL_KEYDOWN){ 
+    switch(event.key.keysym.sym) {
+      case SDLK_UP:
+        m_currentPosition->y -= 1;
+        break;
+      case SDLK_DOWN:
+        m_currentPosition->y += 1;
+        break;
+      case SDLK_LEFT:
+        m_currentPosition->x -= 1;
+        break;
+      case SDLK_RIGHT:
+        m_currentPosition->x += 1;
+        break;
     }
-
-    if(event.type == SDL_KEYUP) {
-      switch(event.key.keysym.sym) {
-        case SDLK_UP:
-          break;
-        case SDLK_DOWN:
-          break;
-        case SDLK_LEFT:
-          break;
-        case SDLK_RIGHT:
-
-          break;
-
-      }
-    }
-  m_currentPosition->x += xval;
-  m_currentPosition->y += yval;
+  }
 }

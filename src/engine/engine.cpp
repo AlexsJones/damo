@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2017-01-12 09:58]
+ *     Last Modified       :     [2017-02-23 15:13]
  *     Description         :      
  **********************************************************************************/
 
@@ -53,16 +53,6 @@ Engine::~Engine() {
 
   SDL_Quit();
 }
-SDL_Texture *Engine::loadTextureFromFile(string filePath) {
-
-  SDL_Texture *texture = IMG_LoadTexture(m_renderer,
-      filePath.c_str());
-  if(texture == NULL) {
-    cerr << "loadTextureFromFile:" << SDL_GetError() << endl;
-  }
-
-  return texture;
-}
 void Engine::renderTexture(SDL_Texture *texture, shared_ptr<SDL_Rect> location,
     SDL_Rect *clip = NULL) {
 
@@ -87,6 +77,14 @@ void Engine::renderActor(shared_ptr<IActor> a, SDL_Event *e) {
   }
 
   renderTexture(a->getTexture(),a->getPosition());
+}
+void Engine::renderLandscape(shared_ptr<ILandscape> l, SDL_Event *e) {
+
+  if(l->isEventEnabled()) {
+    l->tickEvent(e);
+  }
+
+  renderTexture(l->getTexture(),l->getPosition());
 }
 void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
 
