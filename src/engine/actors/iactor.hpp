@@ -40,6 +40,8 @@ class IActor : public IEvent {
 
     virtual void tickEvent(SDL_Event *e) = 0;
 
+    virtual void render(void) = 0;
+
     virtual bool isEventEnabled(void) = 0;
 
     jnx_guid m_guid;

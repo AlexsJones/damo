@@ -2,48 +2,35 @@
 *     File Name           :     src/engine/landscape.hpp
 *     Created By          :     anon
 *     Creation Date       :     [2016-02-17 18:00]
-*     Last Modified       :     [2017-02-23 15:25]
+*     Last Modified       :     [2017-02-23 15:46]
 *     Description         :      
 **********************************************************************************/
 #ifndef __LANDSCAPE_HPP__
 #define __LANDSCAPE_HPP__
 #include <memory>
 #include <SDL2/SDL.h>
+#include "actor.hpp"
 #include "ilandscape.hpp"
 
 using namespace std;
 
-class Landscape : public ILandscape {
+class Landscape : public Actor, public ILandscape{
 
-  public:
-    Landscape(int width, int height, int x, int y);
+    public:
 
-    shared_ptr<SDL_Rect> getPosition(void);
-
-    shared_ptr<SDL_Rect> getSize(void);
-
-    void setTexture(SDL_Texture *tex);
-
-    shared_ptr<SDL_Rect> getTextureSize(void);
-
-    void setPosition(int x, int y);
-
-    void setPosition(shared_ptr<SDL_Rect> pos);
-
-    SDL_Texture* getTexture(void);
-
-    void tickEvent(SDL_Event *e);
-
-    bool isEventEnabled(void);
-
-
-  private:
-
-    int m_width;
+        Landscape(int x, int y, SDL_Renderer *renderer);
     
-    int m_height;
+        Landscape(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
 
-    shared_ptr<SDL_Rect> m_currentPosition;
+        Landscape(int x, int y, SDL_Renderer *renderer, string path);
+
+        SDL_Texture *getTexture(void);
+    
+        shared_ptr<SDL_Rect> getPosition(void);
+
+        void tickEvent(SDL_Event *e);
+
+        bool isEventEnabled(void);
 };
 
 #endif

@@ -28,13 +28,6 @@ class Engine {
 
     void tick(void);
 
-    void renderTexture(SDL_Texture *texture, shared_ptr<SDL_Rect> location,
-        SDL_Rect *clip); 
-
-    void renderActor(shared_ptr<IActor> a, SDL_Event *e);
-
-    void renderLandscape(shared_ptr<ILandscape> l, SDL_Event *e);
-    
     void renderScene(shared_ptr<IScene> s, SDL_Event *e);
 
     void addScene(shared_ptr<IScene> s);

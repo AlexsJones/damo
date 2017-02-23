@@ -14,25 +14,17 @@
 
 using namespace std;
 
-class ILandscape : public IActor {
+class ILandscape {
 
-  public:
-    virtual void setTexture(SDL_Texture *tex) = 0;
+public:
 
-    virtual shared_ptr<SDL_Rect> getTextureSize(void) = 0;
-
-    virtual void setPosition(int x, int y) = 0;
-
-    virtual void setPosition(shared_ptr<SDL_Rect> pos) = 0;
-
+    virtual SDL_Texture *getTexture(void) = 0;
+    
     virtual shared_ptr<SDL_Rect> getPosition(void) = 0;
-
-    virtual SDL_Texture* getTexture(void) = 0;
 
     virtual void tickEvent(SDL_Event *e) = 0;
 
     virtual bool isEventEnabled(void) = 0;
-
 };
 
 #endif

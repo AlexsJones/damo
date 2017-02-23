@@ -28,6 +28,7 @@ class IScene {
     
     virtual list<shared_ptr<IActor>> getActors(void) = 0;
 
+    virtual list<shared_ptr<ILandscape>> getLandscapes(void) = 0;
 };
 
 #endif

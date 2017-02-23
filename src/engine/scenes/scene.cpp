@@ -20,6 +20,10 @@ list<shared_ptr<IActor>> Scene::getActors(void) {
 
   return m_actorList;
 }
+list<shared_ptr<ILandscape>> Scene::getLandscapes(void) {
+	
+  return m_landscapeList;
+}
 void Scene::removeActor(shared_ptr<IActor> a) {
 
   m_actorList.remove(a);

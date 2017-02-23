@@ -75,6 +75,25 @@ void Actor::setPosition(int x, int y) {
 void Actor::setPosition(shared_ptr<SDL_Rect> pos) {
   m_currentPosition = pos;
 }
+void Actor::render() {
+
+  SDL_Rect *clip = NULL;
+  auto location = getPosition();
+  auto texture = getTexture();
+  SDL_Rect dst;
+  dst.x = location->x;
+  dst.y = location->y;
+
+  std::cout << "x:" << dst.x << " y:" << dst.y << std::endl;
+  if(clip != NULL) {
+    dst.w = clip->w;
+    dst.h = clip->h;
+  }else {
+    SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
+  }
+
+  SDL_RenderCopy(ref_renderer,texture,clip,&dst);
+}
 void Actor::tickEvent(SDL_Event *e) {
 
   int xval = 0;

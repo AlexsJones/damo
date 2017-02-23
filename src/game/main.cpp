@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
   shared_ptr<Actor> a = make_shared<Actor>(20,20,eng->getRenderer(),"resources/test/image.png");
 
-  shared_ptr<Landscape> l = make_shared<Landscape>(640,480,0,0);
+  shared_ptr<Landscape> l = make_shared<Landscape>(640,480,eng->getRenderer(),"resources/test/damo.png");
 
   shared_ptr<IScene> s = make_shared<Scene>();
 

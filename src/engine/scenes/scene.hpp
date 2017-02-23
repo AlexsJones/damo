@@ -30,6 +30,8 @@ class Scene : public IScene {
     
     list<shared_ptr<IActor>> getActors(void);
 
+    list<shared_ptr<ILandscape>> getLandscapes(void);
+
   private:
 
     //A scene contains many actors

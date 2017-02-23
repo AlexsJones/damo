@@ -33,6 +33,8 @@ class Actor : public IActor, public TextureLoader  {
  
     void tickEvent(SDL_Event *event);
 
+    void render(void);
+
     bool isEventEnabled(void) {
       return true;
     }
