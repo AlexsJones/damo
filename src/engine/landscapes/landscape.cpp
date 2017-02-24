@@ -35,3 +35,7 @@ bool Landscape::isEventEnabled(void) {
 
   return false;
 }
+void Landscape::render(void) {
+
+  Actor::render();
+}

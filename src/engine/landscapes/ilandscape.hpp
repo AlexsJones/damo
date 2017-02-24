@@ -25,6 +25,8 @@ public:
     virtual void tickEvent(SDL_Event *e) = 0;
 
     virtual bool isEventEnabled(void) = 0;
+
+    virtual void render(void) = 0;
 };
 
 #endif

@@ -31,6 +31,8 @@ class Landscape : public Actor, public ILandscape{
         void tickEvent(SDL_Event *e);
 
         bool isEventEnabled(void);
+
+        void render(void);
 };
 
 #endif

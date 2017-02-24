@@ -59,6 +59,7 @@ void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
     if(l->isEventEnabled()) {
       l->tickEvent(e);
     } 
+    l->render();
   }
 
   for(auto a : s->getActors()) {

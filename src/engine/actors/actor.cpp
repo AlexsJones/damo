@@ -12,17 +12,25 @@
 Actor::Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture):
   ref_renderer(renderer), m_currentPosition(make_shared<SDL_Rect>()) {
 
+    jnx_guid_create(&m_guid);
+
     setPosition(x,y);
 
     setTexture(texture);
+
+    cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
   }
 Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
   ref_renderer(renderer)
   , m_currentPosition(make_shared<SDL_Rect>()) {
 
+    jnx_guid_create(&m_guid);
+
     setPosition(x,y);
 
     setTexture(load(path,ref_renderer));
+
+    cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
   }
 Actor::Actor(int x, int y, SDL_Renderer *renderer):
   ref_renderer(renderer)
@@ -84,7 +92,6 @@ void Actor::render() {
   dst.x = location->x;
   dst.y = location->y;
 
-  std::cout << "x:" << dst.x << " y:" << dst.y << std::endl;
   if(clip != NULL) {
     dst.w = clip->w;
     dst.h = clip->h;
