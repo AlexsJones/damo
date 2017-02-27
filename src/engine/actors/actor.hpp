@@ -36,7 +36,11 @@ class Actor : public IActor, public TextureLoader  {
     void render(const SDL_Rect *clip);
 
     bool isEventEnabled(void) {
-      return true;
+      return m_event_enabled;
+    }
+
+    void setEvent(bool t) {
+        m_event_enabled = t;
     }
 
     Actor(int x, int y, SDL_Renderer *renderer);
@@ -48,6 +52,8 @@ class Actor : public IActor, public TextureLoader  {
     ~Actor(void);
 
   private:
+
+    bool m_event_enabled = false;
 
     SDL_Texture *m_texture;
 

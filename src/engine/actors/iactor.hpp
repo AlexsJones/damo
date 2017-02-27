@@ -44,6 +44,8 @@ class IActor : public IEvent {
 
     virtual bool isEventEnabled(void) = 0;
 
+    virtual void setEvent(bool t) = 0;
+
     jnx_guid m_guid;
 };
 
