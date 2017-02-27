@@ -32,7 +32,9 @@ class Landscape : public Actor, public ILandscape{
 
         bool isEventEnabled(void);
 
-        void render(void);
+        void render(SDL_Rect *clip);
+
+        SDL_Rect getTextureSize(void);
 };
 
 #endif

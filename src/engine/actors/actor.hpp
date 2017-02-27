@@ -21,7 +21,7 @@ class Actor : public IActor, public TextureLoader  {
   public:
     void setTexture(SDL_Texture *tex);
 
-    shared_ptr<SDL_Rect> getTextureSize(void);
+    SDL_Rect getTextureSize(void);
 
     SDL_Texture *getTexture(void);
 
@@ -33,11 +33,12 @@ class Actor : public IActor, public TextureLoader  {
  
     void tickEvent(SDL_Event *event);
 
-    void render(void);
+    void render(const SDL_Rect *clip);
 
     bool isEventEnabled(void) {
       return true;
     }
+
     Actor(int x, int y, SDL_Renderer *renderer);
     
     Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
@@ -53,6 +54,7 @@ class Actor : public IActor, public TextureLoader  {
     SDL_Renderer *ref_renderer;
 
     shared_ptr<SDL_Rect> m_currentPosition;
+
 };
 
 #endif

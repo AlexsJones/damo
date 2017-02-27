@@ -18,6 +18,8 @@ class ILandscape {
 
 public:
 
+	virtual SDL_Rect getTextureSize(void) = 0;
+	
     virtual SDL_Texture *getTexture(void) = 0;
     
     virtual shared_ptr<SDL_Rect> getPosition(void) = 0;
@@ -26,7 +28,7 @@ public:
 
     virtual bool isEventEnabled(void) = 0;
 
-    virtual void render(void) = 0;
+    virtual void render(SDL_Rect *clip = NULL) = 0;
 };
 
 #endif

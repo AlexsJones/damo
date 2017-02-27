@@ -20,7 +20,7 @@ class IActor : public IEvent {
 
     virtual void setTexture(SDL_Texture *tex) = 0;
 
-    virtual shared_ptr<SDL_Rect> getTextureSize(void) = 0;
+    virtual SDL_Rect getTextureSize(void) = 0;
 
     virtual void setPosition(int x, int y) = 0;
 
@@ -40,7 +40,7 @@ class IActor : public IEvent {
 
     virtual void tickEvent(SDL_Event *e) = 0;
 
-    virtual void render(void) = 0;
+    virtual void render(const SDL_Rect *clip) = 0;
 
     virtual bool isEventEnabled(void) = 0;
 

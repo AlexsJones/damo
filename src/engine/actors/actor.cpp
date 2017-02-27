@@ -54,22 +54,20 @@ void Actor::setTexture(SDL_Texture *tex) {
 
 
 }
-shared_ptr<SDL_Rect> Actor::getTextureSize(void) {
+SDL_Rect Actor::getTextureSize(void) {
 
-  shared_ptr<SDL_Rect> r = make_shared<SDL_Rect>();
-  r->w = 0;
-  r->h = 0;
+  SDL_Rect r = { 0,0,0,0};
 
   if(m_texture) {
     int w,h;
     SDL_QueryTexture(m_texture,NULL,NULL,&w,&h);
-    r->w = w;
-    r->h = h;
+    r.w = w;
+    r.h = h;
   }
   return r;
 }
 SDL_Texture *Actor::getTexture(void) {
-  if(!m_texture) return NULL;
+ 
   return m_texture;
 }
 shared_ptr<SDL_Rect> Actor::getPosition(void) {
@@ -83,23 +81,22 @@ void Actor::setPosition(int x, int y) {
 void Actor::setPosition(shared_ptr<SDL_Rect> pos) {
   m_currentPosition = pos;
 }
-void Actor::render() {
+void Actor::render(const SDL_Rect *clip) {
 
-  SDL_Rect *clip = NULL;
-  auto location = getPosition();
+  auto size = getTextureSize();
+  SDL_Rect box = { m_currentPosition->x, m_currentPosition->y, 
+  size.w, size.h};
+
+  box.x -= clip->x;
+  box.y -= clip->y;
+
+  //auto location = getPosition();
   auto texture = getTexture();
-  SDL_Rect dst;
-  dst.x = location->x;
-  dst.y = location->y;
+  //SDL_Rect dst;
+  //SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
+  //Null here will apply the entire texture
 
-  if(clip != NULL) {
-    dst.w = clip->w;
-    dst.h = clip->h;
-  }else {
-    SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
-  }
-
-  SDL_RenderCopy(ref_renderer,texture,clip,&dst);
+  SDL_RenderCopy(ref_renderer,texture,NULL,&box);
 }
 void Actor::tickEvent(SDL_Event *e) {
 
@@ -123,4 +120,6 @@ void Actor::tickEvent(SDL_Event *e) {
         break;
     }
   }
+
+
 }

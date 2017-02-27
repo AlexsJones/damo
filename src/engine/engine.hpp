@@ -13,6 +13,7 @@
 #include "ilandscape.hpp"
 #include "iactor.hpp"
 #include "iscene.hpp"
+#include "camera.hpp"
 #include <list>
 #include <memory>
 #include "engineconstraints.hpp"
@@ -36,7 +37,11 @@ class Engine {
 
     SDL_Renderer *getRenderer(void);
 
+    shared_ptr<Camera> getCamera(void);
+
   private:
+
+    shared_ptr<Camera> m_camera;
 
     SDL_Renderer *m_renderer;
     

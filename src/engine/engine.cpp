@@ -45,6 +45,7 @@ Engine::Engine(int width, int height,bool is_fullscreen):
       cleanup(m_window);
       exit(1);
     }
+    m_camera = make_shared<Camera>(m_window);
 
   }
 Engine::~Engine() {
@@ -55,19 +56,20 @@ Engine::~Engine() {
 }
 void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
 
+  SDL_Rect offset = m_camera->getBox();
+
   for(auto l : s->getLandscapes()) {
     if(l->isEventEnabled()) {
       l->tickEvent(e);
     } 
-    l->render();
+    l->render(&offset);
   }
 
   for(auto a : s->getActors()) {
     if(a->isEventEnabled()) {
       a->tickEvent(e);
     }
-
-    a->render();
+      a->render(&offset);
   }
 
 }
@@ -82,6 +84,8 @@ void Engine::tick() {
       b_shouldExit = true;
     }
   }
+
+  m_camera->update();
 
   for(auto s : m_scenes) {
     renderScene(s, &e);
@@ -99,4 +103,7 @@ bool Engine::IsExiting(void) {
 }
 SDL_Renderer* Engine::getRenderer(void) {
   return m_renderer;
+}
+shared_ptr<Camera> Engine::getCamera(void) {
+  return m_camera;
 }

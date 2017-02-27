@@ -35,7 +35,11 @@ bool Landscape::isEventEnabled(void) {
 
   return false;
 }
-void Landscape::render(void) {
+void Landscape::render(SDL_Rect *clip) {
 
-  Actor::render();
+  Actor::render(clip);
+}
+SDL_Rect Landscape::getTextureSize(void) {
+
+	return Actor::getTextureSize();
 }
