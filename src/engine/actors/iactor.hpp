@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/actor/iactor.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-19 11:51]
- *     Last Modified       :     [2017-02-23 15:28]
+ *     Last Modified       :     [2017-03-01 22:38]
  *     Description         :      
  **********************************************************************************/
 
@@ -30,14 +30,8 @@ class IActor : public IEvent {
 
     virtual SDL_Texture* getTexture(void) = 0;
 
-    string getUniqueIdentifier(void) {
-      jnx_char *str;
-      jnx_guid_to_string(&m_guid,&str);
-      string output(str);
-      free(str);
-      return output;
-    };
-
+    virtual string getUniqueIdentifier(void) = 0;
+    
     virtual void tickEvent(SDL_Event *e) = 0;
 
     virtual void render(const SDL_Rect *clip) = 0;

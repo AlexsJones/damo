@@ -2,7 +2,7 @@
  *     File Name           :     src/engine/actor.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:57]
- *     Last Modified       :     [2017-02-28 13:10]
+ *     Last Modified       :     [2017-03-01 22:38]
  *     Description         :      
  **********************************************************************************/
 
@@ -42,6 +42,14 @@ class Actor : public IActor, public TextureLoader  {
     void setEvent(bool t) {
       m_event_enabled = t;
     }
+
+    string getUniqueIdentifier(void) {
+          jnx_char *str;
+      jnx_guid_to_string(&m_guid,&str);
+      string output(str);
+      free(str);
+      return output;
+    };
 
     Actor(int x, int y, SDL_Renderer *renderer);
 
