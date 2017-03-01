@@ -1,10 +1,10 @@
 /*********************************************************************************
-*     File Name           :     src/engine/landscape.hpp
-*     Created By          :     anon
-*     Creation Date       :     [2016-02-17 18:00]
-*     Last Modified       :     [2017-02-23 15:46]
-*     Description         :      
-**********************************************************************************/
+ *     File Name           :     src/engine/landscape.hpp
+ *     Created By          :     anon
+ *     Creation Date       :     [2016-02-17 18:00]
+ *     Last Modified       :     [2017-02-28 13:11]
+ *     Description         :      
+ **********************************************************************************/
 #ifndef __LANDSCAPE_HPP__
 #define __LANDSCAPE_HPP__
 #include <memory>
@@ -16,25 +16,25 @@ using namespace std;
 
 class Landscape : public Actor, public ILandscape{
 
-    public:
+  public:
 
-        Landscape(int x, int y, SDL_Renderer *renderer);
-    
-        Landscape(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
+    Landscape(int x, int y, SDL_Renderer *renderer);
 
-        Landscape(int x, int y, SDL_Renderer *renderer, string path);
+    Landscape(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
 
-        SDL_Texture *getTexture(void);
-    
-        shared_ptr<SDL_Rect> getPosition(void);
+    Landscape(int x, int y, SDL_Renderer *renderer, string path);
 
-        void tickEvent(SDL_Event *e);
+    SDL_Texture *getTexture(void);
 
-        bool isEventEnabled(void);
+    shared_ptr<SDL_Rect> getPosition(void);
 
-        void render(SDL_Rect *clip);
+    void tickEvent(SDL_Event *e);
 
-        SDL_Rect getTextureSize(void);
+    bool isEventEnabled(void);
+
+    void render(SDL_Rect *clip);
+
+    SDL_Rect getTextureSize(void);
 };
 
 #endif

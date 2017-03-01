@@ -18,6 +18,13 @@ using namespace std;
 
 static string *m_baseRes = NULL;
 
+#define flagOn(a,b) ( a |= b )
+#define flagOff(a,b) ( a &= ~(b) )
+#define hasFlag(a,b) ( ((a & b) == b) ? true : false )
+#define hasFlags(a,b,c) ( ((a & (b | c)) == (b | c)) ? true : false )
+#define excludesFlag(a,b) ( ((a & b) == 0) ? true : false ) //un-tested
+
+
 static string  getResourcePath(const string &subdir ="") {
   const char path_sep = '/';
 

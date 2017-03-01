@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-02-23 15:26]
+ *     Last Modified       :     [2017-02-28 13:10]
  *     Description         :      
  **********************************************************************************/
 
@@ -67,7 +67,7 @@ SDL_Rect Actor::getTextureSize(void) {
   return r;
 }
 SDL_Texture *Actor::getTexture(void) {
- 
+
   return m_texture;
 }
 shared_ptr<SDL_Rect> Actor::getPosition(void) {
@@ -85,7 +85,7 @@ void Actor::render(const SDL_Rect *clip) {
 
   auto size = getTextureSize();
   SDL_Rect box = { m_currentPosition->x, m_currentPosition->y, 
-  size.w, size.h};
+    size.w, size.h};
 
   box.x -= clip->x;
   box.y -= clip->y;

@@ -1,10 +1,10 @@
 /*********************************************************************************
-*     File Name           :     src/engine/actor.hpp
-*     Created By          :     anon
-*     Creation Date       :     [2016-02-16 17:57]
-*     Last Modified       :     [2017-02-23 15:27]
-*     Description         :      
-**********************************************************************************/
+ *     File Name           :     src/engine/actor.hpp
+ *     Created By          :     anon
+ *     Creation Date       :     [2016-02-16 17:57]
+ *     Last Modified       :     [2017-02-28 13:10]
+ *     Description         :      
+ **********************************************************************************/
 
 #ifndef __ACTOR_HPP__
 #define __ACTOR_HPP__
@@ -28,9 +28,9 @@ class Actor : public IActor, public TextureLoader  {
     void setPosition(int x, int y);
 
     void setPosition(shared_ptr<SDL_Rect> pos);
-    
+
     shared_ptr<SDL_Rect> getPosition(void);
- 
+
     void tickEvent(SDL_Event *event);
 
     void render(const SDL_Rect *clip);
@@ -40,11 +40,11 @@ class Actor : public IActor, public TextureLoader  {
     }
 
     void setEvent(bool t) {
-        m_event_enabled = t;
+      m_event_enabled = t;
     }
 
     Actor(int x, int y, SDL_Renderer *renderer);
-    
+
     Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
 
     Actor(int x, int y, SDL_Renderer *renderer, string path);

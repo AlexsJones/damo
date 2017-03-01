@@ -2,11 +2,12 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/engine.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 17:30]
- *     Last Modified       :     [2017-02-23 16:50]
+ *     Last Modified       :     [2017-03-01 10:24]
  *     Description         :      
  **********************************************************************************/
 
 #include "engine.hpp"
+#include "utilities.hpp"
 #include <SDL2/SDL_image.h>
 
 Engine::Engine(int width, int height,bool is_fullscreen):
@@ -69,7 +70,7 @@ void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
     if(a->isEventEnabled()) {
       a->tickEvent(e);
     }
-      a->render(&offset);
+    a->render(&offset);
   }
 
 }
@@ -80,8 +81,28 @@ void Engine::tick() {
   //Trap events
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
-    if(e.type == SDL_QUIT) {
-      b_shouldExit = true;
+    switch(e.type) {
+      case SDL_QUIT:
+        b_shouldExit=true;
+        break;
+      case SDL_KEYDOWN:
+        if (e.key.keysym.sym == SDLK_F4) {
+          if (hasFlag(SDL_GetWindowFlags(m_window), SDL_WINDOW_FULLSCREEN)) {
+            SDL_SetWindowFullscreen(m_window, SDL_FALSE);
+            SDL_SetWindowGrab(m_window, SDL_FALSE);
+          }else {
+            SDL_SetWindowFullscreen(m_window, SDL_TRUE);
+            SDL_SetWindowGrab(m_window, SDL_TRUE);
+          }
+        }; 
+        break;
+      case SDL_WINDOWEVENT:
+        //window.update(event.window);
+        if ( e.window.event == SDL_WINDOWEVENT_RESIZED ){
+          //  window.resize();
+          //  camera.resize(window.getBox());
+        }
+        break;
     }
   }
 
