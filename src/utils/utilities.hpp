@@ -2,7 +2,7 @@
  *     File Name           :     src/utils/resourcefinder.hpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 15:19]
- *     Last Modified       :     [2016-12-18 18:25]
+ *     Last Modified       :     [2017-03-02 16:42]
  *     Description         :      
  **********************************************************************************/
 
@@ -15,7 +15,7 @@
 #include <SDL2/SDL.h>
 
 using namespace std;
-
+#define PATH_MAX 1024
 static string *m_baseRes = NULL;
 
 #define flagOn(a,b) ( a |= b )
@@ -24,28 +24,27 @@ static string *m_baseRes = NULL;
 #define hasFlags(a,b,c) ( ((a & (b | c)) == (b | c)) ? true : false )
 #define excludesFlag(a,b) ( ((a & b) == 0) ? true : false ) //un-tested
 
-
+static std::string getcwd_string( void ) {
+   char buff[PATH_MAX];
+   getcwd( buff, PATH_MAX );
+   std::string cwd( buff );
+   return cwd;
+}
 static string  getResourcePath(const string &subdir ="") {
-  const char path_sep = '/';
 
   if(m_baseRes == NULL) {
-    char *basePath = SDL_GetBasePath();
-    if(basePath) {
-
+    std::string basePath = getcwd_string();
+    if(!basePath.empty()) {
       m_baseRes = new string(basePath);
-  
-      SDL_free(basePath);
     }else {
-      cerr << "Error getting resource path: " << SDL_GetError() << endl;
+      std::cerr << "Error getting base path" << std::endl;
       return NULL;
     }
-
   }
   string str;
   str.append(*m_baseRes);
+  str.append("/");
   str.append(subdir);
-
-  JNXLOG(LDEBUG,"Base log path %s", str.c_str());
   return str;
 } 
 template<typename T, typename... Args>
