@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-03-03 15:09]
+ *     Last Modified       :     [2017-03-03 16:02]
  *     Description         :      
  **********************************************************************************/
 
@@ -89,7 +89,7 @@ void Actor::render(const SDL_Rect *clip) {
   box.y -= clip->y;
 
   auto texture = getTexture();
- 
+
   SDL_RenderCopy(ref_renderer,texture,NULL,&box);
 }
 void Actor::tickEvent(SDL_Event *e) {
@@ -98,22 +98,31 @@ void Actor::tickEvent(SDL_Event *e) {
   int yval = 0;
 
   SDL_Event event = *e;
-  if(event.type == SDL_KEYDOWN){ 
-    switch(event.key.keysym.sym) {
-      case SDLK_UP:
-        m_currentPosition->y -= 1;
-        break;
-      case SDLK_DOWN:
-        m_currentPosition->y += 1;
-        break;
-      case SDLK_LEFT:
-        m_currentPosition->x -= 1;
-        break;
-      case SDLK_RIGHT:
-        m_currentPosition->x += 1;
-        break;
+
+  if (event.type == SDL_KEYDOWN) {
+    switch (event.key.keysym.sym) {
+      case SDLK_LEFT:   ACTION |= LEFT;     break;
+      case SDLK_RIGHT:  ACTION |= RIGHT;    break;
+      case SDLK_UP:     ACTION |= UP;     break;
+      case SDLK_DOWN:   ACTION |= DOWN;     break;
+      default: break;
     }
   }
+  // KeyUp: Turn off Action 
+  if (event.type == SDL_KEYUP) {
+    switch (event.key.keysym.sym) {
+      case SDLK_LEFT:   ACTION &= ~LEFT;    break;
+      case SDLK_RIGHT:  ACTION &= ~RIGHT;   break;
+      case SDLK_UP:     ACTION &= ~UP;      break;
+      case SDLK_DOWN:   ACTION &= ~DOWN;    break;
+      default: break;
+    }
+  }
+
+  if (hasFlag(ACTION, LEFT))  { m_currentPosition->x -= 1; }
+  if (hasFlag(ACTION, RIGHT)) { m_currentPosition->x += 1; }
+  if (hasFlag(ACTION, UP))    { m_currentPosition->y -= 1; }
+  if (hasFlag(ACTION, DOWN))  { m_currentPosition->y += 1; }
 
 }
 
@@ -122,6 +131,6 @@ SDL_Rect Actor::getBox(void) {
   auto size = getTextureSize();
   SDL_Rect box = { m_currentPosition->x, m_currentPosition->y, 
     size.w, size.h};
-  
+
   return box;
 }

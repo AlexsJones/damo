@@ -63,6 +63,8 @@ class Actor : public IActor, public TextureLoader  {
 
   private:
 
+    Uint8 ACTION = 0;
+
     SDL_Rect m_box;
 
     bool m_event_enabled = false;
