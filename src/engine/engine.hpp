@@ -39,6 +39,8 @@ class Engine {
 
     shared_ptr<Camera> getCamera(void);
 
+    void drawRect(SDL_Rect rect);
+
   private:
 
     shared_ptr<Camera> m_camera;

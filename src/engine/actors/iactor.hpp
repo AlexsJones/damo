@@ -24,6 +24,8 @@ class IActor : public IEvent {
 
     virtual void setPosition(int x, int y) = 0;
 
+    virtual SDL_Rect getBox(void) = 0;
+
     virtual void setPosition(shared_ptr<SDL_Rect> pos) = 0;
 
     virtual shared_ptr<SDL_Rect> getPosition(void) = 0;

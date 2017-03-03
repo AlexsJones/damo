@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-02-28 13:10]
+ *     Last Modified       :     [2017-03-03 15:09]
  *     Description         :      
  **********************************************************************************/
 
@@ -83,19 +83,13 @@ void Actor::setPosition(shared_ptr<SDL_Rect> pos) {
 }
 void Actor::render(const SDL_Rect *clip) {
 
-  auto size = getTextureSize();
-  SDL_Rect box = { m_currentPosition->x, m_currentPosition->y, 
-    size.w, size.h};
+  auto box = getBox();
 
   box.x -= clip->x;
   box.y -= clip->y;
 
-  //auto location = getPosition();
   auto texture = getTexture();
-  //SDL_Rect dst;
-  //SDL_QueryTexture(texture,NULL,NULL,&dst.w,&dst.h);
-  //Null here will apply the entire texture
-
+ 
   SDL_RenderCopy(ref_renderer,texture,NULL,&box);
 }
 void Actor::tickEvent(SDL_Event *e) {
@@ -121,5 +115,13 @@ void Actor::tickEvent(SDL_Event *e) {
     }
   }
 
+}
 
+SDL_Rect Actor::getBox(void) {
+
+  auto size = getTextureSize();
+  SDL_Rect box = { m_currentPosition->x, m_currentPosition->y, 
+    size.w, size.h};
+  
+  return box;
 }

@@ -25,6 +25,8 @@ class Actor : public IActor, public TextureLoader  {
 
     SDL_Texture *getTexture(void);
 
+    SDL_Rect getBox(void);
+
     void setPosition(int x, int y);
 
     void setPosition(shared_ptr<SDL_Rect> pos);
@@ -60,6 +62,8 @@ class Actor : public IActor, public TextureLoader  {
     ~Actor(void);
 
   private:
+
+    SDL_Rect m_box;
 
     bool m_event_enabled = false;
 

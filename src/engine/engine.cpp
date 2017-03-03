@@ -70,6 +70,10 @@ void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
     if(a->isEventEnabled()) {
       a->tickEvent(e);
     }
+
+    //Just for debug...
+    drawRect(a->getBox());
+
     a->render(&offset);
   }
 
@@ -127,4 +131,11 @@ SDL_Renderer* Engine::getRenderer(void) {
 }
 shared_ptr<Camera> Engine::getCamera(void) {
   return m_camera;
+}
+void Engine::drawRect(SDL_Rect rect) {
+  rect.x -= m_camera->getBox().x;
+  rect.y -= m_camera->getBox().y;
+  SDL_SetRenderDrawColor(m_renderer, 255,0,0,255);
+  SDL_RenderDrawRect( m_renderer, &rect);
+  SDL_SetRenderDrawColor(m_renderer, 0,0,0,0);
 }
