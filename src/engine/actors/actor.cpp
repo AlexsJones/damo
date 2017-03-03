@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-03-03 16:02]
+ *     Last Modified       :     [2017-03-03 16:04]
  *     Description         :      
  **********************************************************************************/
 
@@ -18,6 +18,8 @@ Actor::Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture):
 
     setTexture(texture);
 
+    setupPhysics();
+
     cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
   }
 Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
@@ -27,6 +29,8 @@ Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
     jnx_guid_create(&m_guid);
 
     setPosition(x,y);
+
+    setupPhysics();
 
     setTexture(load(path,ref_renderer));
 
@@ -40,6 +44,8 @@ Actor::Actor(int x, int y, SDL_Renderer *renderer):
 
     setPosition(x,y);
 
+    setupPhysics();
+
     cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
   }
 Actor::~Actor(void) {
@@ -52,10 +58,6 @@ void Actor::setTexture(SDL_Texture *tex) {
 
   m_texture = tex;
 
-
-}
-SDL_Rect Actor::getTextureSize(void) {
-
   SDL_Rect r = { 0,0,0,0};
 
   if(m_texture) {
@@ -64,7 +66,11 @@ SDL_Rect Actor::getTextureSize(void) {
     r.w = w;
     r.h = h;
   }
-  return r;
+  m_texture_size = r;
+}
+SDL_Rect Actor::getTextureSize(void) {
+
+  return m_texture_size;
 }
 SDL_Texture *Actor::getTexture(void) {
 
@@ -119,11 +125,41 @@ void Actor::tickEvent(SDL_Event *e) {
     }
   }
 
-  if (hasFlag(ACTION, LEFT))  { m_currentPosition->x -= 1; }
-  if (hasFlag(ACTION, RIGHT)) { m_currentPosition->x += 1; }
-  if (hasFlag(ACTION, UP))    { m_currentPosition->y -= 1; }
-  if (hasFlag(ACTION, DOWN))  { m_currentPosition->y += 1; }
+  while ( timestep() ) {
+    float DT = timestep.get() / 1000.0f;
+    if ( vel.x >= 0 ) {
+      vel.x -= deaccstep;
+      if ( vel.x < 0 ) { vel.x = 0; }
+    } else {
+      vel.x += deaccstep;
+      if ( vel.x > 0 ) { vel.x = 0; }
+    }
+    if ( vel.y >= 0 ) {
+      vel.y -= deaccstep;
+      if ( vel.y < 0 ) { vel.y = 0; }
+    } else {
+      vel.y += deaccstep;
+      if ( vel.y > 0 ) { vel.y = 0; }
+    }
+    if (hasFlag(ACTION, LEFT))  { 
+      vel.x -= accstep; }
+    if (hasFlag(ACTION, RIGHT)) { 
+      vel.x += accstep; }
+    if (hasFlag(ACTION, UP))  {
+      vel.y -= accstep; }
+    if (hasFlag(ACTION, DOWN))  { 
+      vel.y += accstep; }
+    
+    if (vel.x > velocity)   vel.x = velocity;
+    if (vel.x < -velocity)  vel.x = -velocity;
+    if (vel.y > velocity)   vel.y = velocity;
+    if (vel.y < -velocity)  vel.y = -velocity;
 
+    m_currentPosition->x += vel.x * DT;
+    m_currentPosition->y += vel.y * DT;
+  }
+
+  if (!ACTION) { timestep.resetTime(); }
 }
 
 SDL_Rect Actor::getBox(void) {

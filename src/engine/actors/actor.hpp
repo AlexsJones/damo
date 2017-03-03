@@ -13,7 +13,8 @@
 #include "textureloader.hpp"
 #include <SDL2/SDL.h>
 #include <memory>
-
+#include "types.hpp"
+#include "timer.hpp"
 using namespace std;
 
 class Actor : public IActor, public TextureLoader  {
@@ -53,6 +54,14 @@ class Actor : public IActor, public TextureLoader  {
       return output;
     };
 
+    void setupPhysics(void) {
+        vel.x = vel.y = 0;
+        acc.x = acc.y = 0;
+        timestep.set( 10 );
+        accstep = 50;
+        deaccstep = accstep / 2.0f;
+    }
+
     Actor(int x, int y, SDL_Renderer *renderer);
 
     Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
@@ -63,6 +72,15 @@ class Actor : public IActor, public TextureLoader  {
 
   private:
 
+
+    float velocity = 1000.0f;
+    fPoint vel;
+    SDL_Point acc;
+    float accstep;
+    float deaccstep;
+  
+    Interval<Uint32> timestep;
+
     Uint8 ACTION = 0;
 
     SDL_Rect m_box;
@@ -72,6 +90,8 @@ class Actor : public IActor, public TextureLoader  {
     SDL_Texture *m_texture;
 
     SDL_Renderer *ref_renderer;
+
+    SDL_Rect m_texture_size;
 
     shared_ptr<SDL_Rect> m_currentPosition;
 
