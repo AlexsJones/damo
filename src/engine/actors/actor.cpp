@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-03-03 16:04]
+ *     Last Modified       :     [2017-03-05 18:49]
  *     Description         :      
  **********************************************************************************/
 
@@ -18,8 +18,6 @@ Actor::Actor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture):
 
     setTexture(texture);
 
-    setupPhysics();
-
     cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
   }
 Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
@@ -29,8 +27,6 @@ Actor::Actor(int x,int y, SDL_Renderer *renderer, string path):
     jnx_guid_create(&m_guid);
 
     setPosition(x,y);
-
-    setupPhysics();
 
     setTexture(load(path,ref_renderer));
 
@@ -43,8 +39,6 @@ Actor::Actor(int x, int y, SDL_Renderer *renderer):
     jnx_guid_create(&m_guid);
 
     setPosition(x,y);
-
-    setupPhysics();
 
     cout << "Created Actor with guid:" << getUniqueIdentifier()  << endl;
   }
@@ -100,66 +94,9 @@ void Actor::render(const SDL_Rect *clip) {
 }
 void Actor::tickEvent(SDL_Event *e) {
 
-  int xval = 0;
-  int yval = 0;
-
-  SDL_Event event = *e;
-
-  if (event.type == SDL_KEYDOWN) {
-    switch (event.key.keysym.sym) {
-      case SDLK_LEFT:   ACTION |= LEFT;     break;
-      case SDLK_RIGHT:  ACTION |= RIGHT;    break;
-      case SDLK_UP:     ACTION |= UP;     break;
-      case SDLK_DOWN:   ACTION |= DOWN;     break;
-      default: break;
-    }
+  for(auto &c : m_components) {
+    c->tickEvent(*this, e);
   }
-  // KeyUp: Turn off Action 
-  if (event.type == SDL_KEYUP) {
-    switch (event.key.keysym.sym) {
-      case SDLK_LEFT:   ACTION &= ~LEFT;    break;
-      case SDLK_RIGHT:  ACTION &= ~RIGHT;   break;
-      case SDLK_UP:     ACTION &= ~UP;      break;
-      case SDLK_DOWN:   ACTION &= ~DOWN;    break;
-      default: break;
-    }
-  }
-
-  while ( timestep() ) {
-    float DT = timestep.get() / 1000.0f;
-    if ( vel.x >= 0 ) {
-      vel.x -= deaccstep;
-      if ( vel.x < 0 ) { vel.x = 0; }
-    } else {
-      vel.x += deaccstep;
-      if ( vel.x > 0 ) { vel.x = 0; }
-    }
-    if ( vel.y >= 0 ) {
-      vel.y -= deaccstep;
-      if ( vel.y < 0 ) { vel.y = 0; }
-    } else {
-      vel.y += deaccstep;
-      if ( vel.y > 0 ) { vel.y = 0; }
-    }
-    if (hasFlag(ACTION, LEFT))  { 
-      vel.x -= accstep; }
-    if (hasFlag(ACTION, RIGHT)) { 
-      vel.x += accstep; }
-    if (hasFlag(ACTION, UP))  {
-      vel.y -= accstep; }
-    if (hasFlag(ACTION, DOWN))  { 
-      vel.y += accstep; }
-    
-    if (vel.x > velocity)   vel.x = velocity;
-    if (vel.x < -velocity)  vel.x = -velocity;
-    if (vel.y > velocity)   vel.y = velocity;
-    if (vel.y < -velocity)  vel.y = -velocity;
-
-    m_currentPosition->x += vel.x * DT;
-    m_currentPosition->y += vel.y * DT;
-  }
-
-  if (!ACTION) { timestep.resetTime(); }
 }
 
 SDL_Rect Actor::getBox(void) {
@@ -169,4 +106,13 @@ SDL_Rect Actor::getBox(void) {
     size.w, size.h};
 
   return box;
+}
+void Actor::addComponent(shared_ptr<IComponent> c) {
+
+  m_components.push_back(c);
+}
+
+void Actor::removeComponent(shared_ptr<IComponent> c) {
+
+
 }

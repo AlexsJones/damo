@@ -11,18 +11,13 @@
 #include <memory>
 #include <SDL2/SDL.h>
 #include <jnxc_headers/jnx_guid.h>
+#include "iobject.hpp"
 #include "ievent.hpp"
+#include "icomponent.hpp"
 using namespace std;
 
-enum Movement {
-    NONE = 0
-    ,LEFT = 1 << 1
-    ,RIGHT = 1 << 2
-    ,UP = 1 << 3
-    ,DOWN = 1 << 4
-};
 
-class IActor : public IEvent {
+class IActor : public IObject, public IEvent {
 
   public: 
 
@@ -49,6 +44,10 @@ class IActor : public IEvent {
     virtual bool isEventEnabled(void) = 0;
 
     virtual void setEvent(bool t) = 0;
+
+    virtual void addComponent(shared_ptr<IComponent> c) = 0;
+
+    virtual void removeComponent(shared_ptr<IComponent> c) = 0;
 
     jnx_guid m_guid;
 };
