@@ -1,6 +1,5 @@
 #include "physics.hpp"
 
-
 Physics::Physics(void) {
 
 	vel.x = vel.y = 0;

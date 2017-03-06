@@ -114,5 +114,5 @@ void Actor::addComponent(shared_ptr<IComponent> c) {
 
 void Actor::removeComponent(shared_ptr<IComponent> c) {
 
-
+  m_components.erase(std::remove(m_components.begin(), m_components.end(), c), m_components.end());
 }
