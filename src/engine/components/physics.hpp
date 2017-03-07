@@ -1,6 +1,5 @@
 #ifndef __PHYSICS_HPP__
 #define __PHYSICS_HPP__
-#include "iobject.hpp"
 #include "icomponent.hpp"
 #include "timer.hpp"
 #include <SDL2/SDL.h>

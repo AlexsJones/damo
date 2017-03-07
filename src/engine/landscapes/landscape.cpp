@@ -27,9 +27,17 @@ shared_ptr<SDL_Rect> Landscape::getPosition(void) {
 
   return Actor::getPosition();
 }
-void Landscape::tickEvent(SDL_Event *e) {
+void Landscape::setPosition(int x, int y) {
 
-  Actor::tickEvent(e);
+  return Actor::setPosition(x,y);
+}
+void Landscape::setPosition(shared_ptr<SDL_Rect> pos) {
+
+  return Actor::setPosition(pos);
+}
+void Landscape::tickEvent(IObject &o, SDL_Event *e) {
+
+  Actor::tickEvent(o,e);
 }
 bool Landscape::isEventEnabled(void) {
 

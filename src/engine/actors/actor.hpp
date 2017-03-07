@@ -34,7 +34,7 @@ class Actor : public IActor, public TextureLoader  {
 
     shared_ptr<SDL_Rect> getPosition(void);
 
-    void tickEvent(SDL_Event *event);
+    void tickEvent(IObject &object, SDL_Event *event);
 
     void render(const SDL_Rect *clip);
 

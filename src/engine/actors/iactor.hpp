@@ -37,7 +37,7 @@ class IActor : public IObject, public IEvent {
 
     virtual string getUniqueIdentifier(void) = 0;
     
-    virtual void tickEvent(SDL_Event *e) = 0;
+    virtual void tickEvent(IObject &object, SDL_Event *e) = 0;
 
     virtual void render(const SDL_Rect *clip) = 0;
 

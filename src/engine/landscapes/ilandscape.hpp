@@ -8,13 +8,14 @@
 
 #ifndef __ILANDSCAPE_HPP__
 #define __ILANDSCAPE_HPP__
-#include "iactor.hpp"
+#include "iobject.hpp"
+#include "ievent.hpp"
 #include <memory>
 #include <SDL2/SDL.h>
 
 using namespace std;
 
-class ILandscape {
+class ILandscape: public IObject, public IEvent {
 
 public:
 
@@ -22,9 +23,13 @@ public:
 	
     virtual SDL_Texture *getTexture(void) = 0;
     
-    virtual shared_ptr<SDL_Rect> getPosition(void) = 0;
+   	virtual void setPosition(int x, int y) = 0;
 
-    virtual void tickEvent(SDL_Event *e) = 0;
+    virtual void setPosition(shared_ptr<SDL_Rect> pos) = 0;
+
+    virtual shared_ptr<SDL_Rect> getPosition(void) = 0;
+    
+    virtual void tickEvent(IObject &obj, SDL_Event *e) = 0;
 
     virtual bool isEventEnabled(void) = 0;
 

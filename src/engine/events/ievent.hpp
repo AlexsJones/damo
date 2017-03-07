@@ -8,11 +8,12 @@
 #ifndef __IEVENT_HPP__
 #define __IEVENT_HPP__
 #include <SDL2/SDL.h>
+#include "iobject.hpp"
 
 class IEvent {
 
   public:
-    virtual void tickEvent(SDL_Event *event) = 0;
+    virtual void tickEvent(IObject &actor, SDL_Event *event) = 0;
 
     virtual bool isEventEnabled(void) = 0;
 };

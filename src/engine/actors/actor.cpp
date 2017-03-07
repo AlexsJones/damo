@@ -92,13 +92,12 @@ void Actor::render(const SDL_Rect *clip) {
 
   SDL_RenderCopy(ref_renderer,texture,NULL,&box);
 }
-void Actor::tickEvent(SDL_Event *e) {
+void Actor::tickEvent(IObject &o, SDL_Event *e) {
 
   for(auto &c : m_components) {
     c->tickEvent(*this, e);
   }
 }
-
 SDL_Rect Actor::getBox(void) {
 
   auto size = getTextureSize();
@@ -111,7 +110,6 @@ void Actor::addComponent(shared_ptr<IComponent> c) {
 
   m_components.push_back(c);
 }
-
 void Actor::removeComponent(shared_ptr<IComponent> c) {
 
   m_components.erase(std::remove(m_components.begin(), m_components.end(), c), m_components.end());

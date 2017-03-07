@@ -26,9 +26,13 @@ class Landscape : public Actor, public ILandscape{
 
     SDL_Texture *getTexture(void);
 
+    void setPosition(int x, int y);
+
+    void setPosition(shared_ptr<SDL_Rect> pos);
+
     shared_ptr<SDL_Rect> getPosition(void);
 
-    void tickEvent(SDL_Event *e);
+    void tickEvent(IObject &o, SDL_Event *e);
 
     bool isEventEnabled(void);
 

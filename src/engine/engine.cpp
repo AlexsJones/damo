@@ -61,14 +61,14 @@ void Engine::renderScene(shared_ptr<IScene> s, SDL_Event *e) {
 
   for(auto l : s->getLandscapes()) {
     if(l->isEventEnabled()) {
-      l->tickEvent(e);
+      l->tickEvent(*l,e);
     } 
     l->render(&offset);
   }
 
   for(auto a : s->getActors()) {
     if(a->isEventEnabled()) {
-      a->tickEvent(e);
+      a->tickEvent(*a,e);
     }
 
     //Just for debug...
