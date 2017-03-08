@@ -7,16 +7,33 @@
 **********************************************************************************/
 
 #include "test_actor.hpp"
+#include "physics.hpp"
+#include <SDL2/SDL.h>
+#include "animate.hpp"
+TestActor::TestActor(int x, int y, SDL_Renderer *renderer):
+	Actor(x,y,renderer,"resources/test/pog.png",{0,0,47,51}) {
 
-TestActor::TestActor(int x, int y, SDL_Renderer *renderer):Actor(x,y,renderer){
+	this->addComponent(make_shared<Physics>());
+	SDL_Rect frame = {0,0,47,51};
+	auto ani = make_shared<Animate>();
+  	frame.w = 47;
+    frame.h = 51;
+  	ani->addAnimation(Animation({ frame }, LEFT));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, RIGHT));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, UP));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, DOWN));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, UP + LEFT));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, UP + RIGHT));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, DOWN + LEFT));
+  	frame.y += frame.h;
+  	ani->addAnimation(Animation({ frame }, DOWN + RIGHT));
+  	this->addComponent(ani);
+  	this->setEvent(true);
 }
 
-TestActor::TestActor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture):Actor(x,y,renderer,texture) {
-
-}
-TestActor::TestActor(int x, int y, SDL_Renderer *renderer, string path):Actor(x,y,renderer,path) {
-
-}
-TestActor::TestActor(int x, int y, SDL_Renderer *renderer, string path, SDL_Rect custom_size):Actor(x,y,renderer,path,custom_size) {
-
-}

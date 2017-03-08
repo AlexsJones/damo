@@ -13,14 +13,8 @@
 class TestActor : public Actor {
 
   public:
+
     TestActor(int x, int y, SDL_Renderer *renderer);
-
-    TestActor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture);
-
-    TestActor(int x, int y, SDL_Renderer *renderer, string path);
-
-    TestActor(int x, int y, SDL_Renderer *renderer, string path,
-     SDL_Rect custom_render_size);
 
 };
 #endif
