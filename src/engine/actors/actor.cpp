@@ -2,7 +2,7 @@
  *     File Name           :     /home/anon/Code/sdl/src/engine/actor.cpp
  *     Created By          :     anon
  *     Creation Date       :     [2016-02-16 18:00]
- *     Last Modified       :     [2017-03-05 18:49]
+ *     Last Modified       :     [2017-03-08 22:20]
  *     Description         :      
  **********************************************************************************/
 
@@ -156,5 +156,4 @@ void Actor::addComponent(shared_ptr<IComponent> c) {
 }
 void Actor::removeComponent(shared_ptr<IComponent> c) {
 
-  m_components.erase(std::remove(m_components.begin(), m_components.end(), c), m_components.end());
 }
