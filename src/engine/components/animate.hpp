@@ -1,24 +1,21 @@
 #ifndef __ANIMATE__HPP__
 #define __ANIMATE__HPP__
 #include "icomponent.hpp"
+#include "types.hpp"
+#include "animation.hpp"
 #include <iostream>
 #include <vector>
-class Animation {
-
-	public:
-	Animation(std::vector<SDL_Rect> clip, std::string name):
-	m_name(name),m_clip(clip) {
-	}
-
-	std::string m_name;
-	std::vector<SDL_Rect> m_clip;
-
-};
+#include <unordered_map>
 
 class Animate : public IComponent {
 
+public:
+
 	void tickEvent(IObject &actor, SDL_Event *event);
 
-	void AddAnimation(shared_ptr<Animation> animation);
+	void addAnimation(Animation animation);
+
+private:
+	std::unordered_map<Uint8, Animation > m_hashmap;
 };
 #endif

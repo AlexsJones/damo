@@ -20,7 +20,7 @@ public:
 
     virtual void removeAction(Uint8 a) = 0;
 
-
+    virtual void setClip(SDL_Rect c) = 0;
 };
 
 #endif

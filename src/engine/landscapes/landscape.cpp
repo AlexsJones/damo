@@ -51,3 +51,7 @@ SDL_Rect Landscape::getTextureSize(void) {
 
   return Actor::getTextureSize();
 }
+void Landscape::setClip(SDL_Rect c) {
+
+  Actor::setClip(c);
+}

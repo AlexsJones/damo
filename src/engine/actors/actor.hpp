@@ -24,6 +24,8 @@ class Actor : public IActor, public TextureLoader  {
 
     SDL_Rect getTextureSize(void);
 
+    SDL_Rect getRenderedSize(void);
+
     SDL_Texture *getTexture(void);
 
     Uint8 getAction(void);
@@ -33,6 +35,8 @@ class Actor : public IActor, public TextureLoader  {
     void removeAction(Uint8 a);
 
     SDL_Rect getBox(void);
+
+    void setClip(SDL_Rect c);
 
     void setPosition(int x, int y);
 
@@ -45,10 +49,12 @@ class Actor : public IActor, public TextureLoader  {
     void render(const SDL_Rect *clip);
 
     bool isEventEnabled(void) {
+
       return m_event_enabled;
     }
 
     void setEvent(bool t) {
+      
       m_event_enabled = t;
     }
 
@@ -66,6 +72,8 @@ class Actor : public IActor, public TextureLoader  {
 
     Actor(int x, int y, SDL_Renderer *renderer, string path);
 
+    Actor(int x, int y, SDL_Renderer *renderer, string path, SDL_Rect custom_render_size);
+
     ~Actor(void);
 
     void addComponent(shared_ptr<IComponent> c);
@@ -73,8 +81,11 @@ class Actor : public IActor, public TextureLoader  {
     void removeComponent(shared_ptr<IComponent> c);
 
 
-  
   private:
+
+    SDL_Rect m_custom_render_size = {0,0,0,0};
+
+    SDL_Rect m_clip = {0,0,0,0};
 
     Uint8 m_ACTION = 0;
 

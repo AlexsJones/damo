@@ -13,6 +13,8 @@
 #include "scene.hpp"
 #include "test_actor.hpp"
 #include "physics.hpp"
+#include "types.hpp"
+#include "animate.hpp"
 #include <memory>
 #include <thread>
 using namespace std;
@@ -21,9 +23,34 @@ int main(int argc, char **argv) {
 
   shared_ptr<Engine> eng = make_shared<Engine>(800,800,false);
 
-  shared_ptr<TestActor> a = make_shared<TestActor>(0,300,eng->getRenderer(),"resources/test/character.png");
+
+  SDL_Rect frame = {0,0,47,51};
+  shared_ptr<TestActor> a = make_shared<TestActor>(0,
+    300,eng->getRenderer(),"resources/test/pog.png",frame);
 
   a->addComponent(make_shared<Physics>());
+
+  auto ani = make_shared<Animate>();
+
+  
+  frame.w = 47;
+  frame.h = 51;
+  ani->addAnimation(Animation({ frame }, LEFT));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, RIGHT));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, UP));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, DOWN));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, UP + LEFT));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, UP + RIGHT));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, DOWN + LEFT));
+  frame.y += frame.h;
+  ani->addAnimation(Animation({ frame }, DOWN + RIGHT));
+  a->addComponent(ani);
 
   a->setEvent(true);
 

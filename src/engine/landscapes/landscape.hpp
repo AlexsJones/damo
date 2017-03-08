@@ -46,6 +46,9 @@ class Landscape : public Actor, public ILandscape{
     void render(SDL_Rect *clip);
 
     SDL_Rect getTextureSize(void);
+
+    void setClip(SDL_Rect c);
+
 };
 
 #endif

@@ -17,4 +17,6 @@ TestActor::TestActor(int x, int y, SDL_Renderer *renderer, SDL_Texture *texture)
 TestActor::TestActor(int x, int y, SDL_Renderer *renderer, string path):Actor(x,y,renderer,path) {
 
 }
+TestActor::TestActor(int x, int y, SDL_Renderer *renderer, string path, SDL_Rect custom_size):Actor(x,y,renderer,path,custom_size) {
 
+}

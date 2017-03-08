@@ -40,6 +40,8 @@ public:
     virtual bool isEventEnabled(void) = 0;
 
     virtual void render(SDL_Rect *clip = NULL) = 0;
+
+    virtual void setClip(SDL_Rect c) = 0;
 };
 
 #endif

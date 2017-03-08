@@ -25,7 +25,11 @@ class IActor : public IObject, public IEvent {
 
     virtual SDL_Rect getTextureSize(void) = 0;
 
+    virtual SDL_Rect getRenderedSize(void) = 0;
+
     virtual Uint8 getAction(void) = 0;
+
+    virtual void setClip(SDL_Rect c) = 0;
 
     virtual void addAction(Uint8 a) = 0;
 
