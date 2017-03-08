@@ -26,6 +26,12 @@ class Actor : public IActor, public TextureLoader  {
 
     SDL_Texture *getTexture(void);
 
+    Uint8 getAction(void);
+
+    void addAction(Uint8 a);
+
+    void removeAction(Uint8 a);
+
     SDL_Rect getBox(void);
 
     void setPosition(int x, int y);
@@ -66,7 +72,11 @@ class Actor : public IActor, public TextureLoader  {
 
     void removeComponent(shared_ptr<IComponent> c);
 
+
+  
   private:
+
+    Uint8 m_ACTION = 0;
 
     vector<shared_ptr<IComponent>> m_components;
 

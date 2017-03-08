@@ -48,6 +48,16 @@ Actor::~Actor(void) {
     cleanup(m_texture);
   }
 }
+Uint8 Actor::getAction(void) {
+
+  return m_ACTION;
+}
+void Actor::addAction(Uint8 a) {
+  m_ACTION |= a;
+}
+void Actor::removeAction(Uint8 a) {
+  m_ACTION &= a;
+}
 void Actor::setTexture(SDL_Texture *tex) {
 
   m_texture = tex;

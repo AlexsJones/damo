@@ -35,8 +35,6 @@ private:
   
     Interval<Uint32> timestep;
 
-    Uint8 ACTION = 0;
-
 };
 
 #endif 

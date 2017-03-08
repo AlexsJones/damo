@@ -26,6 +26,13 @@ class Landscape : public Actor, public ILandscape{
 
     SDL_Texture *getTexture(void);
 
+    Uint8 getAction(void) { 
+        return 0;
+    }
+    void addAction(Uint8 a) {}
+
+    void removeAction(Uint8 a){}
+
     void setPosition(int x, int y);
 
     void setPosition(shared_ptr<SDL_Rect> pos);

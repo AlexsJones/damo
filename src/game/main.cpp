@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 
   shared_ptr<Engine> eng = make_shared<Engine>(800,800,false);
 
-  shared_ptr<TestActor> a = make_shared<TestActor>(20,20,eng->getRenderer(),"resources/test/image.png");
+  shared_ptr<TestActor> a = make_shared<TestActor>(0,300,eng->getRenderer(),"resources/test/character.png");
 
   a->addComponent(make_shared<Physics>());
 
@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
   shared_ptr<TestActor> b = make_shared<TestActor>(500,500,eng->getRenderer(),"resources/test/pattern.png");
 
-  shared_ptr<Landscape> l = make_shared<Landscape>(0,0,eng->getRenderer(),"resources/test/damo.png");
+  shared_ptr<Landscape> l = make_shared<Landscape>(0,0,eng->getRenderer(),"resources/test/city.png");
 
   shared_ptr<IScene> s = make_shared<Scene>();
 

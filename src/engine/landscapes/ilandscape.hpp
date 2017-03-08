@@ -22,13 +22,19 @@ public:
 	virtual SDL_Rect getTextureSize(void) = 0;
 	
     virtual SDL_Texture *getTexture(void) = 0;
+
+    virtual Uint8 getAction(void) = 0;
+
+    virtual void addAction(Uint8 a) = 0;
+
+    virtual void removeAction(Uint8 a) = 0;
     
    	virtual void setPosition(int x, int y) = 0;
 
     virtual void setPosition(shared_ptr<SDL_Rect> pos) = 0;
 
     virtual shared_ptr<SDL_Rect> getPosition(void) = 0;
-    
+
     virtual void tickEvent(IObject &obj, SDL_Event *e) = 0;
 
     virtual bool isEventEnabled(void) = 0;

@@ -12,22 +12,24 @@ void Physics::tickEvent(IObject &actor, SDL_Event *e) {
 
   SDL_Event event = *e;
 
+  auto ACTION = actor.getAction();
+
   if (event.type == SDL_KEYDOWN) {
     switch (event.key.keysym.sym) {
-      case SDLK_LEFT:   ACTION |= LEFT;     break;
-      case SDLK_RIGHT:  ACTION |= RIGHT;    break;
-      case SDLK_UP:     ACTION |= UP;     break;
-      case SDLK_DOWN:   ACTION |= DOWN;     break;
+      case SDLK_LEFT:   actor.addAction(LEFT); break;
+      case SDLK_RIGHT:  actor.addAction(RIGHT);    break;
+      case SDLK_UP:     actor.addAction(UP);     break;
+      case SDLK_DOWN:   actor.addAction(DOWN);     break;
       default: break;
     }
   }
   // KeyUp: Turn off Action 
   if (event.type == SDL_KEYUP) {
     switch (event.key.keysym.sym) {
-      case SDLK_LEFT:   ACTION &= ~LEFT;    break;
-      case SDLK_RIGHT:  ACTION &= ~RIGHT;   break;
-      case SDLK_UP:     ACTION &= ~UP;      break;
-      case SDLK_DOWN:   ACTION &= ~DOWN;    break;
+      case SDLK_LEFT:   actor.removeAction(~LEFT);    break;
+      case SDLK_RIGHT:  actor.removeAction(~RIGHT);   break;
+      case SDLK_UP:     actor.removeAction(~UP);      break;
+      case SDLK_DOWN:   actor.removeAction(~DOWN);    break;
       default: ACTION=0;
     }
   }

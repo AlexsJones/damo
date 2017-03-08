@@ -14,6 +14,13 @@ public:
 
     virtual shared_ptr<SDL_Rect> getPosition(void) = 0;
 
+    virtual Uint8 getAction(void) = 0;
+
+    virtual void addAction(Uint8 a) = 0;
+
+    virtual void removeAction(Uint8 a) = 0;
+
+
 };
 
 #endif
