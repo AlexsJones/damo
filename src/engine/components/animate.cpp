@@ -16,3 +16,7 @@ void Animate::addAnimation(Animation animation) {
 
 	m_hashmap.insert(i);
 }
+std::unordered_map<Uint8, Animation > Animate::getHashmap(void) {
+	
+	return m_hashmap;
+}

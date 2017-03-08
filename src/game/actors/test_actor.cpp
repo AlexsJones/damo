@@ -24,6 +24,8 @@ TestActor::TestActor(int x, int y, SDL_Renderer *renderer):
   	frame.y += frame.h;
   	ani->addAnimation(Animation({ frame }, UP));
   	frame.y += frame.h;
+  	//Set facing direction
+  	setClip(frame);
   	ani->addAnimation(Animation({ frame }, DOWN));
   	frame.y += frame.h;
   	ani->addAnimation(Animation({ frame }, UP + LEFT));
@@ -35,5 +37,6 @@ TestActor::TestActor(int x, int y, SDL_Renderer *renderer):
   	ani->addAnimation(Animation({ frame }, DOWN + RIGHT));
   	this->addComponent(ani);
   	this->setEvent(true);
+
 }
 

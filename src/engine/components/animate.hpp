@@ -15,6 +15,8 @@ public:
 
 	void addAnimation(Animation animation);
 
+	std::unordered_map<Uint8, Animation > getHashmap(void);
+
 private:
 	std::unordered_map<Uint8, Animation > m_hashmap;
 };
